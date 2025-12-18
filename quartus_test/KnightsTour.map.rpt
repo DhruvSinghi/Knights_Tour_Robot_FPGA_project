@@ -1,0 +1,797 @@
+Analysis & Synthesis report for KnightsTour
+Sat Dec  7 01:11:21 2024
+Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |KnightsTour|sponge:ISPNG|state
+  9. State Machine - |KnightsTour|inert_intf:iNEMO|state
+ 10. State Machine - |KnightsTour|inert_intf:iNEMO|spi:ispi|state
+ 11. State Machine - |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT|state
+ 12. State Machine - |KnightsTour|TourCmd:iTC|state
+ 13. State Machine - |KnightsTour|TourLogic:iTL|state
+ 14. State Machine - |KnightsTour|cmd_proc:iCMD|state
+ 15. Registers Removed During Synthesis
+ 16. Removed Registers Triggering Further Register Optimizations
+ 17. General Register Statistics
+ 18. Inverted Register Statistics
+ 19. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 20. Parameter Settings for User Entity Instance: cmd_proc:iCMD
+ 21. Parameter Settings for User Entity Instance: inert_intf:iNEMO
+ 22. Parameter Settings for User Entity Instance: inert_intf:iNEMO|inertial_integrator:iINT
+ 23. Parameter Settings for User Entity Instance: IR_intf:iIR
+ 24. Parameter Settings for User Entity Instance: sponge:ISPNG
+ 25. Port Connectivity Checks: "IR_intf:iIR|PWM3:iDUTY"
+ 26. Port Connectivity Checks: "inert_intf:iNEMO|spi:ispi"
+ 27. Port Connectivity Checks: "UART_wrapper:iWRAP"
+ 28. Post-Synthesis Netlist Statistics for Top Partition
+ 29. Elapsed Time Per Partition
+ 30. Analysis & Synthesis Messages
+ 31. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++------------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Dec  7 01:11:21 2024          ;
+; Quartus Prime Version              ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name                      ; KnightsTour                                    ;
+; Top-level Entity Name              ; KnightsTour                                    ;
+; Family                             ; Cyclone IV E                                   ;
+; Total logic elements               ; 1,942                                          ;
+;     Total combinational functions  ; 1,464                                          ;
+;     Dedicated logic registers      ; 852                                            ;
+; Total registers                    ; 852                                            ;
+; Total pins                         ; 19                                             ;
+; Total virtual pins                 ; 0                                              ;
+; Total memory bits                  ; 0                                              ;
+; Embedded Multiplier 9-bit elements ; 0                                              ;
+; Total PLLs                         ; 0                                              ;
++------------------------------------+------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE22F17C6       ;                    ;
+; Top-level entity name                                            ; KnightsTour        ; KnightsTour        ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 14          ;
+;                            ;             ;
+; Average used               ; 1.01        ;
+; Maximum used               ; 14          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.1%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-14        ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                              ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                          ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------+---------+
+; rst_synch.sv                     ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/rst_synch.sv           ;         ;
+; KnightsTour.sv                   ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/KnightsTour.sv         ;         ;
+; UART_wrapper.sv                  ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/UART_wrapper.sv        ;         ;
+; cmd_proc.sv                      ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/cmd_proc.sv            ;         ;
+; TourLogic.sv                     ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/TourLogic.sv           ;         ;
+; TourCmd.sv                       ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/TourCmd.sv             ;         ;
+; inert_intf.sv                    ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/inert_intf.sv          ;         ;
+; PID.sv                           ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/PID.sv                 ;         ;
+; MtrDrv.sv                        ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/MtrDrv.sv              ;         ;
+; sponge.sv                        ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/sponge.sv              ;         ;
+; UART.sv                          ; yes             ; User Verilog HDL File        ; I:/ECE551/project/quartus_test/UART.sv                ;         ;
+; spi.sv                           ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/spi.sv                 ;         ;
+; PWM.sv                           ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/PWM.sv                 ;         ;
+; inertial_integrator.sv           ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/inertial_integrator.sv ;         ;
+; IR_intf.sv                       ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/IR_intf.sv             ;         ;
+; UART_tx.sv                       ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/UART_tx.sv             ;         ;
+; UART_rx.sv                       ; yes             ; User SystemVerilog HDL File  ; I:/ECE551/project/quartus_test/UART_rx.sv             ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 1,942     ;
+;                                             ;           ;
+; Total combinational functions               ; 1464      ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 827       ;
+;     -- 3 input functions                    ; 395       ;
+;     -- <=2 input functions                  ; 242       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 1110      ;
+;     -- arithmetic mode                      ; 354       ;
+;                                             ;           ;
+; Total registers                             ; 852       ;
+;     -- Dedicated logic registers            ; 852       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 19        ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 852       ;
+; Total fan-out                               ; 8359      ;
+; Average fan-out                             ; 3.55      ;
++---------------------------------------------+-----------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                        ;
++----------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node       ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                     ; Entity Name         ; Library Name ;
++----------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+---------------------+--------------+
+; |KnightsTour                     ; 1464 (1)            ; 852 (0)                   ; 0           ; 0            ; 0       ; 0         ; 19   ; 0            ; |KnightsTour                                            ; KnightsTour         ; work         ;
+;    |IR_intf:iIR|                 ; 49 (47)             ; 42 (41)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|IR_intf:iIR                                ; IR_intf             ; work         ;
+;       |PWM3:iDUTY|               ; 2 (2)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|IR_intf:iIR|PWM3:iDUTY                     ; PWM3                ; work         ;
+;    |MtrDrv:iMTR|                 ; 22 (0)              ; 2 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|MtrDrv:iMTR                                ; MtrDrv              ; work         ;
+;       |PWM:idUT|                 ; 11 (11)             ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|MtrDrv:iMTR|PWM:idUT                       ; PWM                 ; work         ;
+;       |PWM:jDUT|                 ; 11 (11)             ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|MtrDrv:iMTR|PWM:jDUT                       ; PWM                 ; work         ;
+;    |PID:iCNTRL|                  ; 135 (135)           ; 72 (72)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|PID:iCNTRL                                 ; PID                 ; work         ;
+;    |TourCmd:iTC|                 ; 37 (37)             ; 10 (10)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|TourCmd:iTC                                ; TourCmd             ; work         ;
+;    |TourLogic:iTL|               ; 770 (770)           ; 433 (433)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|TourLogic:iTL                              ; TourLogic           ; work         ;
+;    |UART_wrapper:iWRAP|          ; 92 (13)             ; 65 (10)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|UART_wrapper:iWRAP                         ; UART_wrapper        ; work         ;
+;       |UART:iUART0|              ; 79 (0)              ; 55 (0)                    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0             ; UART                ; work         ;
+;          |UART_rx:iRX|           ; 42 (42)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX ; UART_rx             ; work         ;
+;          |UART_tx:iTX|           ; 37 (37)             ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX ; UART_tx             ; work         ;
+;    |cmd_proc:iCMD|               ; 72 (72)             ; 29 (29)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|cmd_proc:iCMD                              ; cmd_proc            ; work         ;
+;    |inert_intf:iNEMO|            ; 222 (17)            ; 156 (24)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|inert_intf:iNEMO                           ; inert_intf          ; work         ;
+;       |inertial_integrator:iINT| ; 165 (165)           ; 101 (101)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT  ; inertial_integrator ; work         ;
+;       |spi:ispi|                 ; 40 (40)             ; 31 (31)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|inert_intf:iNEMO|spi:ispi                  ; spi                 ; work         ;
+;    |rst_synch:iRST|              ; 0 (0)               ; 2 (2)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|rst_synch:iRST                             ; rst_synch           ; work         ;
+;    |sponge:ISPNG|                ; 64 (64)             ; 41 (41)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |KnightsTour|sponge:ISPNG                               ; sponge              ; work         ;
++----------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|sponge:ISPNG|state                                                                                          ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+------------+-------------+
+; Name        ; state.note7 ; state.note6 ; state.note5 ; state.note4 ; state.note3 ; state.note2 ; state.note1 ; state.IDLE ; state.note8 ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+------------+-------------+
+; state.IDLE  ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0          ; 0           ;
+; state.note1 ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 1          ; 0           ;
+; state.note2 ; 0           ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 1          ; 0           ;
+; state.note3 ; 0           ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 1          ; 0           ;
+; state.note4 ; 0           ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 1          ; 0           ;
+; state.note5 ; 0           ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 1          ; 0           ;
+; state.note6 ; 0           ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1          ; 0           ;
+; state.note7 ; 1           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1          ; 0           ;
+; state.note8 ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 0           ; 1          ; 1           ;
++-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+------------+-------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|inert_intf:iNEMO|state                                                                   ;
++--------------------+-----------------+-----------------+--------------------+-------------+-------------+-------------+
+; Name               ; state.CAP_YAW_H ; state.CAP_YAW_L ; state.INT_ff2_WAIT ; state.INIT3 ; state.INIT2 ; state.INIT1 ;
++--------------------+-----------------+-----------------+--------------------+-------------+-------------+-------------+
+; state.INIT1        ; 0               ; 0               ; 0                  ; 0           ; 0           ; 0           ;
+; state.INIT2        ; 0               ; 0               ; 0                  ; 0           ; 1           ; 1           ;
+; state.INIT3        ; 0               ; 0               ; 0                  ; 1           ; 0           ; 1           ;
+; state.INT_ff2_WAIT ; 0               ; 0               ; 1                  ; 0           ; 0           ; 1           ;
+; state.CAP_YAW_L    ; 0               ; 1               ; 0                  ; 0           ; 0           ; 1           ;
+; state.CAP_YAW_H    ; 1               ; 0               ; 0                  ; 0           ; 0           ; 1           ;
++--------------------+-----------------+-----------------+--------------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------+
+; State Machine - |KnightsTour|inert_intf:iNEMO|spi:ispi|state            ;
++--------------------+------------+------------------+--------------------+
+; Name               ; state.IDLE ; state.BACK_PORCH ; state.TRANSMITTING ;
++--------------------+------------+------------------+--------------------+
+; state.IDLE         ; 0          ; 0                ; 0                  ;
+; state.TRANSMITTING ; 1          ; 0                ; 1                  ;
+; state.BACK_PORCH   ; 1          ; 1                ; 0                  ;
++--------------------+------------+------------------+--------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT|state ;
++-------------------+------------+---------------+-----------------------------+
+; Name              ; state.IDLE ; state.RUNNING ; state.CALIBRATING           ;
++-------------------+------------+---------------+-----------------------------+
+; state.IDLE        ; 0          ; 0             ; 0                           ;
+; state.CALIBRATING ; 1          ; 0             ; 1                           ;
+; state.RUNNING     ; 1          ; 1             ; 0                           ;
++-------------------+------------+---------------+-----------------------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|TourCmd:iTC|state                                             ;
++---------------+---------------+---------------+---------------+------------+---------------+
+; Name          ; state.HR_MOVE ; state.HOLD_VT ; state.VT_MOVE ; state.IDLE ; state.HOLD_HR ;
++---------------+---------------+---------------+---------------+------------+---------------+
+; state.IDLE    ; 0             ; 0             ; 0             ; 0          ; 0             ;
+; state.VT_MOVE ; 0             ; 0             ; 1             ; 1          ; 0             ;
+; state.HOLD_VT ; 0             ; 1             ; 0             ; 1          ; 0             ;
+; state.HR_MOVE ; 1             ; 0             ; 0             ; 1          ; 0             ;
+; state.HOLD_HR ; 0             ; 0             ; 0             ; 1          ; 1             ;
++---------------+---------------+---------------+---------------+------------+---------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|TourLogic:iTL|state                                             ;
++-----------------+-----------------+----------------+------------+------------+---------------+
+; Name            ; state.MAKE_MOVE ; state.POSSIBLE ; state.INIT ; state.IDLE ; state.BACK_UP ;
++-----------------+-----------------+----------------+------------+------------+---------------+
+; state.IDLE      ; 0               ; 0              ; 0          ; 0          ; 0             ;
+; state.INIT      ; 0               ; 0              ; 1          ; 1          ; 0             ;
+; state.POSSIBLE  ; 0               ; 1              ; 0          ; 1          ; 0             ;
+; state.MAKE_MOVE ; 1               ; 0              ; 0          ; 1          ; 0             ;
+; state.BACK_UP   ; 0               ; 0              ; 0          ; 1          ; 1             ;
++-----------------+-----------------+----------------+------------+------------+---------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------+
+; State Machine - |KnightsTour|cmd_proc:iCMD|state                                           ;
++-----------------+---------------+---------------+-----------+------------+-----------------+
+; Name            ; state.RAMP_UP ; state.MOV_CMD ; state.CAL ; state.IDLE ; state.RAMP_DOWN ;
++-----------------+---------------+---------------+-----------+------------+-----------------+
+; state.IDLE      ; 0             ; 0             ; 0         ; 0          ; 0               ;
+; state.CAL       ; 0             ; 0             ; 1         ; 1          ; 0               ;
+; state.MOV_CMD   ; 0             ; 1             ; 0         ; 1          ; 0               ;
+; state.RAMP_UP   ; 1             ; 0             ; 0         ; 1          ; 0               ;
+; state.RAMP_DOWN ; 0             ; 0             ; 0         ; 1          ; 1               ;
++-----------------+---------------+---------------+-----------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                  ;
++------------------------------------------------------+----------------------------------------------+
+; Register name                                        ; Reason for Removal                           ;
++------------------------------------------------------+----------------------------------------------+
+; PID:iCNTRL|frwrd_ZE[10]                              ; Stuck at GND due to stuck port data_in       ;
+; sponge:ISPNG|durtn_cntr[0..2]                        ; Merged with sponge:ISPNG|durtn_cntr[3]       ;
+; sponge:ISPNG|freq_cntr[0..2]                         ; Merged with sponge:ISPNG|freq_cntr[3]        ;
+; cmd_proc:iCMD|frwrd[0..3]                            ; Merged with cmd_proc:iCMD|frwrd[4]           ;
+; cmd_proc:iCMD|desired_heading[0..2]                  ; Merged with cmd_proc:iCMD|desired_heading[3] ;
+; PID:iCNTRL|frwrd_ZE[1..4]                            ; Merged with PID:iCNTRL|frwrd_ZE[0]           ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[10]                         ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[10]     ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[9]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[9]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[8]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[8]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[7]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[7]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[6]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[6]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[5]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[5]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[4]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[4]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[3]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[3]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[2]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[2]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[1]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[1]      ;
+; MtrDrv:iMTR|PWM:jDUT|cnt[0]                          ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[0]      ;
+; sponge:ISPNG|durtn_cntr[3]                           ; Stuck at GND due to stuck port data_in       ;
+; sponge:ISPNG|freq_cntr[3]                            ; Stuck at GND due to stuck port data_in       ;
+; cmd_proc:iCMD|frwrd[4]                               ; Stuck at GND due to stuck port data_in       ;
+; PID:iCNTRL|frwrd_ZE[0]                               ; Stuck at GND due to stuck port data_in       ;
+; MtrDrv:iMTR|PWM:idUT|cnt[0]                          ; Merged with IR_intf:iIR|smpl_tmr[0]          ;
+; IR_intf:iIR|PWM3:iDUTY|cnt[0]                        ; Merged with IR_intf:iIR|smpl_tmr[0]          ;
+; inert_intf:iNEMO|timer[0]                            ; Merged with IR_intf:iIR|smpl_tmr[0]          ;
+; MtrDrv:iMTR|PWM:idUT|cnt[1]                          ; Merged with IR_intf:iIR|smpl_tmr[1]          ;
+; IR_intf:iIR|PWM3:iDUTY|cnt[1]                        ; Merged with IR_intf:iIR|smpl_tmr[1]          ;
+; inert_intf:iNEMO|timer[1]                            ; Merged with IR_intf:iIR|smpl_tmr[1]          ;
+; inert_intf:iNEMO|timer[2]                            ; Merged with IR_intf:iIR|PWM3:iDUTY|cnt[2]    ;
+; MtrDrv:iMTR|PWM:idUT|cnt[2]                          ; Merged with IR_intf:iIR|PWM3:iDUTY|cnt[2]    ;
+; IR_intf:iIR|PWM3:iDUTY|cnt[2]                        ; Merged with IR_intf:iIR|smpl_tmr[2]          ;
+; inert_intf:iNEMO|timer[3]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[3]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[3]                          ; Merged with IR_intf:iIR|smpl_tmr[3]          ;
+; inert_intf:iNEMO|timer[4]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[4]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[4]                          ; Merged with IR_intf:iIR|smpl_tmr[4]          ;
+; inert_intf:iNEMO|timer[5]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[5]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[5]                          ; Merged with IR_intf:iIR|smpl_tmr[5]          ;
+; inert_intf:iNEMO|timer[6]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[6]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[6]                          ; Merged with IR_intf:iIR|smpl_tmr[6]          ;
+; inert_intf:iNEMO|timer[7]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[7]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[7]                          ; Merged with IR_intf:iIR|smpl_tmr[7]          ;
+; inert_intf:iNEMO|timer[8]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[8]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[8]                          ; Merged with IR_intf:iIR|smpl_tmr[8]          ;
+; inert_intf:iNEMO|timer[9]                            ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[9]      ;
+; MtrDrv:iMTR|PWM:idUT|cnt[9]                          ; Merged with IR_intf:iIR|smpl_tmr[9]          ;
+; inert_intf:iNEMO|timer[10]                           ; Merged with MtrDrv:iMTR|PWM:idUT|cnt[10]     ;
+; MtrDrv:iMTR|PWM:idUT|cnt[10]                         ; Merged with IR_intf:iIR|smpl_tmr[10]         ;
+; inert_intf:iNEMO|timer[11]                           ; Merged with IR_intf:iIR|smpl_tmr[11]         ;
+; inert_intf:iNEMO|timer[12]                           ; Merged with IR_intf:iIR|smpl_tmr[12]         ;
+; inert_intf:iNEMO|timer[13]                           ; Merged with IR_intf:iIR|smpl_tmr[13]         ;
+; inert_intf:iNEMO|timer[14]                           ; Merged with IR_intf:iIR|smpl_tmr[14]         ;
+; inert_intf:iNEMO|timer[15]                           ; Merged with IR_intf:iIR|smpl_tmr[15]         ;
+; sponge:ISPNG|state~4                                 ; Lost fanout                                  ;
+; sponge:ISPNG|state~5                                 ; Lost fanout                                  ;
+; sponge:ISPNG|state~6                                 ; Lost fanout                                  ;
+; inert_intf:iNEMO|state~4                             ; Lost fanout                                  ;
+; inert_intf:iNEMO|state~5                             ; Lost fanout                                  ;
+; inert_intf:iNEMO|state~6                             ; Lost fanout                                  ;
+; TourCmd:iTC|state~4                                  ; Lost fanout                                  ;
+; TourCmd:iTC|state~5                                  ; Lost fanout                                  ;
+; TourLogic:iTL|state~4                                ; Lost fanout                                  ;
+; TourLogic:iTL|state~5                                ; Lost fanout                                  ;
+; cmd_proc:iCMD|state~4                                ; Lost fanout                                  ;
+; cmd_proc:iCMD|state~5                                ; Lost fanout                                  ;
+; inert_intf:iNEMO|inertial_integrator:iINT|state.IDLE ; Lost fanout                                  ;
+; IR_intf:iIR|smpl_tmr[16]                             ; Lost fanout                                  ;
+; IR_intf:iIR|blanking_timer[17..22]                   ; Lost fanout                                  ;
+; Total Number of Removed Registers = 83               ;                                              ;
++------------------------------------------------------+----------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                 ;
++------------------------+---------------------------+----------------------------------------+
+; Register name          ; Reason for Removal        ; Registers Removed due to This Register ;
++------------------------+---------------------------+----------------------------------------+
+; cmd_proc:iCMD|frwrd[4] ; Stuck at GND              ; PID:iCNTRL|frwrd_ZE[0]                 ;
+;                        ; due to stuck port data_in ;                                        ;
++------------------------+---------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 852   ;
+; Number of registers using Synchronous Clear  ; 109   ;
+; Number of registers using Synchronous Load   ; 72    ;
+; Number of registers using Asynchronous Clear ; 789   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 642   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------+
+; Inverted Register Statistics                                         ;
++------------------------------------------------------------+---------+
+; Inverted Register                                          ; Fan out ;
++------------------------------------------------------------+---------+
+; inert_intf:iNEMO|spi:ispi|sclk_div[4]                      ; 4       ;
+; inert_intf:iNEMO|spi:ispi|sclk_div[0]                      ; 3       ;
+; inert_intf:iNEMO|spi:ispi|sclk_div[1]                      ; 3       ;
+; inert_intf:iNEMO|spi:ispi|sclk_div[2]                      ; 4       ;
+; inert_intf:iNEMO|spi:ispi|sclk_div[3]                      ; 4       ;
+; inert_intf:iNEMO|spi:ispi|ss_n                             ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[0]  ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[1]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[2]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[7] ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[6] ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[5] ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[4] ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[1] ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[0] ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[2] ; 8       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[3]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[8] ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[10]    ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[8]     ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[4]     ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[2]     ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[0]     ; 3       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|rx_shift_reg[3] ; 2       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[4]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|RX_ff1          ; 5       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[5]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|RX_ff0          ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[6]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[7]  ; 1       ;
+; UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[8]  ; 2       ;
+; Total number of inverted registers = 31                    ;         ;
++------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |KnightsTour|inert_intf:iNEMO|spi:ispi|bit_cntr[2]                     ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |KnightsTour|inert_intf:iNEMO|spi:ispi|shift_reg[9]                    ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT|smpl_cntr[5]    ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |KnightsTour|TourLogic:iTL|move_num[4]                                 ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |KnightsTour|cmd_proc:iCMD|frwrd[9]                                    ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |KnightsTour|TourCmd:iTC|mv_indx[4]                                    ;
+; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; Yes        ; |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT|yaw_int[7]      ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |KnightsTour|cmd_proc:iCMD|counted_lines[3]                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |KnightsTour|PID:iCNTRL|err_sat_ff[8]                                  ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |KnightsTour|PID:iCNTRL|integrator[8]                                  ;
+; 3:1                ; 23 bits   ; 46 LEs        ; 23 LEs               ; 23 LEs                 ; Yes        ; |KnightsTour|IR_intf:iIR|blanking_timer[15]                            ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |KnightsTour|TourLogic:iTL|yy[2]                                       ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; Yes        ; |KnightsTour|TourLogic:iTL|move_try[5]                                 ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[1]    ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX|tx_shft_reg[3] ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |KnightsTour|UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX|baud_cnt[10]   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |KnightsTour|TourCmd:iTC|cmd[1]                                        ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|backup                                      ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 50 LEs               ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|board                                       ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |KnightsTour|PID:iCNTRL|D_diff_sat[6]                                  ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |KnightsTour|PID:iCNTRL|lft_spd[6]                                     ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |KnightsTour|PID:iCNTRL|rght_spd[8]                                    ;
+; 32:1               ; 8 bits    ; 168 LEs       ; 128 LEs              ; 40 LEs                 ; No         ; |KnightsTour|TourLogic:iTL|Mux5                                        ;
+; 32:1               ; 8 bits    ; 168 LEs       ; 128 LEs              ; 40 LEs                 ; No         ; |KnightsTour|TourLogic:iTL|Mux26                                       ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |KnightsTour|inert_intf:iNEMO|spi:ispi|Selector1                       ;
+; 7:1                ; 8 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Mux16                                       ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Selector0                                   ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Selector3                                   ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Mux16                                       ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |KnightsTour|inert_intf:iNEMO|Selector10                               ;
+; 10:1               ; 8 bits    ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Mux31                                       ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; No         ; |KnightsTour|TourCmd:iTC|Selector4                                     ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 4 LEs                ; 6 LEs                  ; No         ; |KnightsTour|TourCmd:iTC|Selector0                                     ;
+; 12:1               ; 5 bits    ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; No         ; |KnightsTour|cmd_proc:iCMD|Selector6                                   ;
+; 14:1               ; 8 bits    ; 72 LEs        ; 72 LEs               ; 0 LEs                  ; No         ; |KnightsTour|TourLogic:iTL|Mux14                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cmd_proc:iCMD ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; FAST_SIM       ; 1     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: inert_intf:iNEMO ;
++----------------+-------+--------------------------------------+
+; Parameter Name ; Value ; Type                                 ;
++----------------+-------+--------------------------------------+
+; FAST_SIM       ; 1     ; Signed Integer                       ;
++----------------+-------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: inert_intf:iNEMO|inertial_integrator:iINT ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; FAST_SIM       ; 1     ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: IR_intf:iIR ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; FAST_SIM       ; 1     ; Signed Integer                  ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sponge:ISPNG ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; FAST_SIM       ; 1     ; Signed Integer                   ;
+; freq           ; 15    ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "IR_intf:iIR|PWM3:iDUTY" ;
++---------+-------+----------+-----------------------+
+; Port    ; Type  ; Severity ; Details               ;
++---------+-------+----------+-----------------------+
+; duty[1] ; Input ; Info     ; Stuck at GND          ;
++---------+-------+----------+-----------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "inert_intf:iNEMO|spi:ispi"                                                                 ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; cmd[4..2]   ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cmd[14]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cmd[7]      ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cmd[0]      ; Input  ; Info     ; Stuck at GND                                                                        ;
+; resp[15..8] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "UART_wrapper:iWRAP"                                                                    ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; tx_done ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 19                          ;
+; cycloneiii_ff         ; 852                         ;
+;     CLR               ; 107                         ;
+;     CLR SCLR          ; 31                          ;
+;     CLR SCLR SLD      ; 12                          ;
+;     CLR SLD           ; 16                          ;
+;     ENA CLR           ; 551                         ;
+;     ENA CLR SCLR      ; 66                          ;
+;     ENA CLR SLD       ; 6                           ;
+;     ENA SLD           ; 19                          ;
+;     SLD               ; 19                          ;
+;     plain             ; 25                          ;
+; cycloneiii_lcell_comb ; 1470                        ;
+;     arith             ; 354                         ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 136                         ;
+;         3 data inputs ; 216                         ;
+;     normal            ; 1116                        ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 34                          ;
+;         2 data inputs ; 74                          ;
+;         3 data inputs ; 179                         ;
+;         4 data inputs ; 827                         ;
+;                       ;                             ;
+; Max LUT depth         ; 15.00                       ;
+; Average LUT depth     ; 7.18                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+    Info: Processing started: Sat Dec  7 01:11:11 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off KnightsTour -c KnightsTour
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file rst_synch.sv
+    Info (12023): Found entity 1: rst_synch File: I:/ECE551/project/quartus_test/rst_synch.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file knightstour.sv
+    Info (12023): Found entity 1: KnightsTour File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 1
+Warning (12019): Can't analyze file -- file reset_synch.sv is missing
+Info (12021): Found 1 design units, including 1 entities, in source file uart_wrapper.sv
+    Info (12023): Found entity 1: UART_wrapper File: I:/ECE551/project/quartus_test/UART_wrapper.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cmd_proc.sv
+    Info (12023): Found entity 1: cmd_proc File: I:/ECE551/project/quartus_test/cmd_proc.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tourlogic.sv
+    Info (12023): Found entity 1: TourLogic File: I:/ECE551/project/quartus_test/TourLogic.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tourcmd.sv
+    Info (12023): Found entity 1: TourCmd File: I:/ECE551/project/quartus_test/TourCmd.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file inert_intf.sv
+    Info (12023): Found entity 1: inert_intf File: I:/ECE551/project/quartus_test/inert_intf.sv Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file pid.sv
+    Info (12023): Found entity 1: PID File: I:/ECE551/project/quartus_test/PID.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mtrdrv.sv
+    Info (12023): Found entity 1: MtrDrv File: I:/ECE551/project/quartus_test/MtrDrv.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sponge.sv
+    Info (12023): Found entity 1: sponge File: I:/ECE551/project/quartus_test/sponge.sv Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file uart.sv
+    Info (12023): Found entity 1: UART File: I:/ECE551/project/quartus_test/UART.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file spi.sv
+    Info (12023): Found entity 1: spi File: I:/ECE551/project/quartus_test/spi.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file pwm.sv
+    Info (12023): Found entity 1: PWM File: I:/ECE551/project/quartus_test/PWM.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file inertial_integrator.sv
+    Info (12023): Found entity 1: inertial_integrator File: I:/ECE551/project/quartus_test/inertial_integrator.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file ir_intf.sv
+    Info (12023): Found entity 1: IR_intf File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 1
+    Info (12023): Found entity 2: PWM3 File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 124
+Info (12021): Found 1 design units, including 1 entities, in source file remotecomm.sv
+    Info (12023): Found entity 1: RemoteComm_e File: I:/ECE551/project/quartus_test/RemoteComm.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx.sv
+    Info (12023): Found entity 1: UART_tx File: I:/ECE551/project/quartus_test/UART_tx.sv Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file uart_rx.sv
+    Info (12023): Found entity 1: UART_rx File: I:/ECE551/project/quartus_test/UART_rx.sv Line: 8
+Info (12127): Elaborating entity "KnightsTour" for the top level hierarchy
+Info (12128): Elaborating entity "rst_synch" for hierarchy "rst_synch:iRST" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 52
+Info (12128): Elaborating entity "UART_wrapper" for hierarchy "UART_wrapper:iWRAP" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 59
+Info (12128): Elaborating entity "UART" for hierarchy "UART_wrapper:iWRAP|UART:iUART0" File: I:/ECE551/project/quartus_test/UART_wrapper.sv Line: 24
+Info (12128): Elaborating entity "UART_tx" for hierarchy "UART_wrapper:iWRAP|UART:iUART0|UART_tx:iTX" File: I:/ECE551/project/quartus_test/UART.sv Line: 14
+Warning (10230): Verilog HDL assignment warning at UART_tx.sv(67): truncated value with size 32 to match size of target (12) File: I:/ECE551/project/quartus_test/UART_tx.sv Line: 67
+Warning (10230): Verilog HDL assignment warning at UART_tx.sv(98): truncated value with size 32 to match size of target (4) File: I:/ECE551/project/quartus_test/UART_tx.sv Line: 98
+Info (12128): Elaborating entity "UART_rx" for hierarchy "UART_wrapper:iWRAP|UART:iUART0|UART_rx:iRX" File: I:/ECE551/project/quartus_test/UART.sv Line: 19
+Warning (10230): Verilog HDL assignment warning at UART_rx.sv(79): truncated value with size 32 to match size of target (12) File: I:/ECE551/project/quartus_test/UART_rx.sv Line: 79
+Warning (10230): Verilog HDL assignment warning at UART_rx.sv(108): truncated value with size 32 to match size of target (4) File: I:/ECE551/project/quartus_test/UART_rx.sv Line: 108
+Info (12128): Elaborating entity "cmd_proc" for hierarchy "cmd_proc:iCMD" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 68
+Warning (10230): Verilog HDL assignment warning at cmd_proc.sv(76): truncated value with size 32 to match size of target (4) File: I:/ECE551/project/quartus_test/cmd_proc.sv Line: 76
+Info (10264): Verilog HDL Case Statement information at cmd_proc.sv(145): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/cmd_proc.sv Line: 145
+Info (12128): Elaborating entity "TourLogic" for hierarchy "TourLogic:iTL" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 74
+Info (10264): Verilog HDL Case Statement information at TourLogic.sv(81): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/TourLogic.sv Line: 81
+Warning (10230): Verilog HDL assignment warning at TourLogic.sv(137): truncated value with size 32 to match size of target (5) File: I:/ECE551/project/quartus_test/TourLogic.sv Line: 137
+Warning (10230): Verilog HDL assignment warning at TourLogic.sv(139): truncated value with size 32 to match size of target (5) File: I:/ECE551/project/quartus_test/TourLogic.sv Line: 139
+Info (12128): Elaborating entity "TourCmd" for hierarchy "TourCmd:iTC" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 82
+Warning (10230): Verilog HDL assignment warning at TourCmd.sv(29): truncated value with size 32 to match size of target (5) File: I:/ECE551/project/quartus_test/TourCmd.sv Line: 29
+Info (10264): Verilog HDL Case Statement information at TourCmd.sv(58): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/TourCmd.sv Line: 58
+Info (12128): Elaborating entity "inert_intf" for hierarchy "inert_intf:iNEMO" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 90
+Info (10264): Verilog HDL Case Statement information at inert_intf.sv(98): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/inert_intf.sv Line: 98
+Info (12128): Elaborating entity "inertial_integrator" for hierarchy "inert_intf:iNEMO|inertial_integrator:iINT" File: I:/ECE551/project/quartus_test/inert_intf.sv Line: 76
+Info (10264): Verilog HDL Case Statement information at inertial_integrator.sv(74): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/inertial_integrator.sv Line: 74
+Warning (10230): Verilog HDL assignment warning at inertial_integrator.sv(131): truncated value with size 32 to match size of target (12) File: I:/ECE551/project/quartus_test/inertial_integrator.sv Line: 131
+Warning (10230): Verilog HDL assignment warning at inertial_integrator.sv(188): truncated value with size 22 to match size of target (19) File: I:/ECE551/project/quartus_test/inertial_integrator.sv Line: 188
+Info (12128): Elaborating entity "spi" for hierarchy "inert_intf:iNEMO|spi:ispi" File: I:/ECE551/project/quartus_test/inert_intf.sv Line: 78
+Warning (10230): Verilog HDL assignment warning at spi.sv(31): truncated value with size 32 to match size of target (5) File: I:/ECE551/project/quartus_test/spi.sv Line: 31
+Warning (10230): Verilog HDL assignment warning at spi.sv(45): truncated value with size 32 to match size of target (5) File: I:/ECE551/project/quartus_test/spi.sv Line: 45
+Info (12128): Elaborating entity "PID" for hierarchy "PID:iCNTRL" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 96
+Warning (10230): Verilog HDL assignment warning at PID.sv(70): truncated value with size 32 to match size of target (15) File: I:/ECE551/project/quartus_test/PID.sv Line: 70
+Info (12128): Elaborating entity "MtrDrv" for hierarchy "MtrDrv:iMTR" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 103
+Info (12128): Elaborating entity "PWM" for hierarchy "MtrDrv:iMTR|PWM:idUT" File: I:/ECE551/project/quartus_test/MtrDrv.sv Line: 17
+Warning (10230): Verilog HDL assignment warning at pwm.sv(14): truncated value with size 32 to match size of target (11) File: I:/ECE551/project/quartus_test/pwm.sv Line: 14
+Info (12128): Elaborating entity "IR_intf" for hierarchy "IR_intf:iIR" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 110
+Warning (10230): Verilog HDL assignment warning at IR_intf.sv(30): truncated value with size 32 to match size of target (17) File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 30
+Warning (10230): Verilog HDL assignment warning at IR_intf.sv(86): truncated value with size 32 to match size of target (23) File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 86
+Info (12128): Elaborating entity "PWM3" for hierarchy "IR_intf:iIR|PWM3:iDUTY" File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 116
+Warning (10230): Verilog HDL assignment warning at IR_intf.sv(140): truncated value with size 32 to match size of target (3) File: I:/ECE551/project/quartus_test/IR_intf.sv Line: 140
+Info (12128): Elaborating entity "sponge" for hierarchy "sponge:ISPNG" File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 115
+Info (10264): Verilog HDL Case Statement information at sponge.sv(50): all case item expressions in this case statement are onehot File: I:/ECE551/project/quartus_test/sponge.sv Line: 50
+Info (13000): Registers with preset signals will power-up high File: I:/ECE551/project/quartus_test/spi.sv Line: 8
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 20 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file I:/ECE551/project/quartus_test/KnightsTour.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1984 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 8 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 1965 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 4851 megabytes
+    Info: Processing ended: Sat Dec  7 01:11:21 2024
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:14
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in I:/ECE551/project/quartus_test/KnightsTour.map.smsg.
+
+

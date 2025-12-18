@@ -1,0 +1,123 @@
+`timescale 1ns/1ps
+import tb_tasks::*;
+module KnightsTour_tb();
+
+  localparam FAST_SIM = 1;
+  
+  
+  /////////////////////////////
+  // Stimulus of type reg //
+  /////////////////////////
+  reg clk, RST_n;
+  reg [15:0] cmd;
+  reg send_cmd;
+
+  ///////////////////////////////////
+  // Declare any internal signals //
+  /////////////////////////////////
+  wire SS_n,SCLK,MOSI,MISO,INT;
+  wire lftPWM1,lftPWM2,rghtPWM1,rghtPWM2;
+  wire TX_RX, RX_TX;
+  logic cmd_sent;
+  logic resp_rdy;
+  logic [7:0] resp;
+  wire IR_en;
+  wire lftIR_n,rghtIR_n,cntrIR_n;
+  logic [15:0] cmd_to_snd;
+  
+  //////////////////////
+  // Instantiate DUT //
+  ////////////////////
+  KnightsTour iDUT(.clk(clk), .RST_n(RST_n), .SS_n(SS_n), .SCLK(SCLK),
+                   .MOSI(MOSI), .MISO(MISO), .INT(INT), .lftPWM1(lftPWM1),
+				   .lftPWM2(lftPWM2), .rghtPWM1(rghtPWM1), .rghtPWM2(rghtPWM2),
+				   .RX(TX_RX), .TX(RX_TX), .piezo(piezo), .piezo_n(piezo_n),
+				   .IR_en(IR_en), .lftIR_n(lftIR_n), .rghtIR_n(rghtIR_n),
+				   .cntrIR_n(cntrIR_n));
+				  
+  /////////////////////////////////////////////////////
+  // Instantiate RemoteComm to send commands to DUT //
+  ///////////////////////////////////////////////////
+  RemoteComm_e iRMT(.clk(clk), .rst_n(RST_n), .RX(RX_TX), .TX(TX_RX), .cmd(cmd),
+             .send_cmd(send_cmd), .cmd_sent(cmd_sent), .resp_rdy(resp_rdy), .resp(resp), .clr_resp_rdy());
+				   
+  //////////////////////////////////////////////////////
+  // Instantiate model of Knight Physics (and board) //
+  ////////////////////////////////////////////////////
+  KnightPhysics iPHYS(.clk(clk),.RST_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.MISO(MISO),
+                      .MOSI(MOSI),.INT(INT),.lftPWM1(lftPWM1),.lftPWM2(lftPWM2),
+					  .rghtPWM1(rghtPWM1),.rghtPWM2(rghtPWM2),.IR_en(IR_en),
+					  .lftIR_n(lftIR_n),.rghtIR_n(rghtIR_n),.cntrIR_n(cntrIR_n)); 
+  			   
+  initial begin
+	
+  ///////////////////////////////////////////////
+  /////// Initialize and Calibrate //////////////
+  ///////////////////////////////////////////////
+
+    initialize(.RST_n(RST_n), .clk(clk), .send_cmd(send_cmd), .cmd(cmd), .rst_n(iDUT.rst_n), .lftPWM(iDUT.iMTR.lftPWM1), .rghtPWM(iDUT.iMTR.rghtPWM1), .resp(resp), .NEMO_setup(iPHYS.iNEMO.NEMO_setup), .resp_rdy(resp_rdy));
+
+
+
+   //////////////////////////////////////////////////
+   //////// Test with manual Commands  //////////////
+   //////////////////////////////////////////////////
+
+    for (int i = 0; i < 8; i++) begin
+	if(i == 0) cmd_to_snd = 16'h4001;	// go north
+	else if(i == 1) cmd_to_snd = 16'h4bf1;	// go east
+	else if(i == 2) cmd_to_snd = 16'h47f1;	// go south
+	else if(i == 3) cmd_to_snd = 16'h43f1;	// go west
+	else if(i == 4) cmd_to_snd = 16'h5002;  // go north by 2 squares with fanfare high for every move
+	else if(i == 5) cmd_to_snd = 16'h53f2;	// go west by 2 squares
+	else if(i == 6) cmd_to_snd = 16'h57f2;	// go south by 2 squares	
+	else if(i == 7) cmd_to_snd = 16'h5bf2;	// go east by 2 squares
+		
+	//Some checks performed while moving others at the end of the move
+	send_command(.cmd_to_snd(cmd_to_snd),.send_cmd(send_cmd),.cmd(cmd),.clk(clk));
+   	fork	
+		Duty_check(.lftPWM(iDUT.iMTR.lftPWM1), .rghtPWM(iDUT.iMTR.rghtPWM1), .error(iDUT.iCMD.error), .moving(iDUT.iCMD.moving), .clk(clk));
+		check_dirctn(.desired_heading(iDUT.iCMD.desired_heading),.frwrd(iDUT.iCMD.frwrd), .clk(clk), .xx(iPHYS.xx), .yy(iPHYS.yy));
+		check_omega(.omega_sum(iPHYS.omega_sum), .frwrd(iDUT.iCMD.frwrd), .moving(iDUT.iCMD.moving));
+		cntrIR_n_fires(.cntrIR_n(iPHYS.cntrIR_n), .cmd(cmd));
+		if(cmd[15:12] === 16'h5) check_fanfare(.fanfare_go(iDUT.iCMD.fanfare_go), .cmd(cmd));
+		check4resp(.clk(clk), .resp_rdy(resp_rdy), .resp(resp));
+		X_Y_pos(.xx(iPHYS.xx),.yy(iPHYS.yy), .desired_heading(iDUT.iCMD.desired_heading), .cmd(cmd), .clk(clk), .resp(resp), .resp_rdy(resp_rdy));
+	join
+	     	
+	check_heading(.heading(iDUT.iNEMO.iINT.heading),.desired_heading(iDUT.iCMD.desired_heading));
+
+	end
+
+
+   //////////////////////////////////////////////////
+   //////// Test with Tour command  /////////////////
+   //////////////////////////////////////////////////
+
+    cmd_to_snd = 16'h6022;
+    send_command(.cmd_to_snd(cmd_to_snd),.send_cmd(send_cmd),.cmd(cmd),.clk(clk));
+    fork
+    	num_moves_TL(.resp(resp), .resp_rdy(resp_rdy));
+   	check_moves_tour_logic(.cmd(iDUT.iTC.cmd), .xx(iPHYS.xx),.yy(iPHYS.yy), .resp_rdy(resp_rdy), .clk(clk), .desired_heading(iDUT.iCMD.desired_heading),.resp(resp));
+    join
+
+     
+    
+	
+    
+
+    repeat(500000) @(posedge clk); 
+
+
+	$stop();
+  
+  end
+
+
+  always
+    #5 clk = ~clk; 
+    
+  
+endmodule
+
+

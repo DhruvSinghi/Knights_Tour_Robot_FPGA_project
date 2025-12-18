@@ -1,0 +1,146 @@
+/****************************************************************************************************
+| Note | Frequency (Hz) | Duration (clocks) |  Freq div = Freq of FPGA / Freq of Note |
+|------|----------------|-------------------|-----------------------------------------|
+| D7   | 2349           | 2^23              |    21,285.65 --> 21,286             |
+| E7   | 2637           | 2^23              |    18,960.94 --> 18,961             |
+| F7   | 2794           | 2^23              |    17,895.49 --> 17,896             |
+| E7   | 2637           | 2^23 + 2^22       |    18,960.94 --> 18,961             |
+| F7   | 2794           | 2^22              |    17,895.49 --> 17,896             |
+| D7   | 2349           | 2^23 + 2^22       |    21,285.65 --> 21,286             |
+| A6   | 1760           | 2^22              |    28,409.09 --> 28,409             |
+| D7   | 2349           | 2^23              |    21,285.65 --> 21,286             |
+
+******************************************************************************************************/
+module sponge (
+    input clk, rst_n, // 50MHz clock and Unsynchronized input from push button
+    input go,         // Raw PB version of go
+    output logic piezo, piezo_n // Differential drive of piezo bender
+);
+
+    parameter FAST_SIM = 1;               // used for speeding up simulation
+    parameter freq = $clog2(28409);       // note 'A6' --> 1760Hz freq
+
+    logic [23:0] durtn_cntr;
+    logic [freq - 1 : 0] freq_cntr;       // Frequency counter with calculated bit width
+    logic durtn_full;
+    logic [freq - 1 : 0] octave_freq;
+    logic [4:0] update;
+    logic [24:0] target_duration;  // Target duration based on note requirements
+
+    generate if (FAST_SIM)
+        assign update = 5'd16;
+    else
+        assign update = 5'd1;
+    endgenerate
+
+    typedef enum logic [3:0] { IDLE, note1, note2, note3, note4, note5, note6, note7, note8 } state_t;
+    state_t state, nxt_state;
+
+    always_ff @(posedge clk, negedge rst_n)
+        if(!rst_n)
+            state <= IDLE;
+        else
+            state <= nxt_state;
+
+    always_comb begin
+        octave_freq = 'x;
+        nxt_state = state;
+        target_duration = 'x;
+
+        case(state)
+            note1: begin
+                octave_freq = 15'd21280;
+                target_duration = 24'd8388608;  // 2^23
+                if (durtn_full)
+                    nxt_state = note2;
+            end
+
+            note2: begin
+                octave_freq = 15'd18960;
+                target_duration = 24'd8388608;  // 2^23
+                if (durtn_full)
+                    nxt_state = note3;
+            end
+
+            note3: begin
+                octave_freq = 15'd17888;
+                target_duration = 24'd8388608;  // 2^23
+                if (durtn_full)
+                    nxt_state = note4;
+            end
+
+            note4: begin
+                octave_freq = 15'd18960;
+                target_duration = 24'd12582912;  // 2^23 + 2^22
+                if (durtn_full)
+                    nxt_state = note5;
+            end
+
+            note5: begin
+                octave_freq = 15'd17888;
+                target_duration = 24'd4194304;  // 2^22
+                if (durtn_full)
+                    nxt_state = note6;
+            end
+
+            note6: begin
+                octave_freq = 15'd21280;
+                target_duration = 24'd12582912;  // 2^23 + 2^22
+                if (durtn_full)
+                    nxt_state = note7;
+            end
+
+            note7: begin
+                octave_freq = 15'd28416;
+                target_duration = 24'd4194304;  // 2^22
+                if (durtn_full)
+                    nxt_state = note8;
+            end
+
+            note8: begin
+                octave_freq = 15'd21280;
+                target_duration = 24'd8388608;  // 2^23
+                if (durtn_full)
+                    nxt_state = IDLE;  // Reset to IDLE to complete the sequence
+            end
+
+            default: begin  // Default state is IDLE
+            	octave_freq = 15'd0;		// default outputs in IDLE, if you're making them x's in SM
+                if (go)
+                    nxt_state = note1;
+            end
+        endcase
+    end
+
+    always_ff @(posedge clk, negedge rst_n) begin
+        if (!rst_n)
+            durtn_cntr <= 0;
+        else if (durtn_full)  // Check if target duration is reached
+            durtn_cntr <= 0;        // Reset on reaching the target duration
+        else
+            durtn_cntr <= durtn_cntr + update;
+    end
+
+    assign durtn_full = (durtn_cntr == target_duration);  // Duration completion signal
+
+
+    // Frequency counter
+    always_ff @(posedge clk, negedge rst_n)
+        if(!rst_n)
+            freq_cntr <= 0;
+        else if (freq_cntr == octave_freq)
+        // Reset at octave_freq threshold, counter id having more bits than octave freq, so we're making it zero when it crossses
+            freq_cntr <= 0;
+        else
+            freq_cntr <= freq_cntr + update;
+
+    // Generate piezo output waveform
+    always_ff @(posedge clk, negedge rst_n)
+        if(!rst_n)
+            piezo <= 0;
+        else
+            piezo <= (freq_cntr < (octave_freq >> 1)); // Adjusted for Piezo, dividing octave freq by 2
+
+    assign piezo_n = ~piezo;
+
+endmodule

@@ -1,0 +1,6 @@
+ vlog -cover bcst KnightsTour_tb.sv tb_tasks.sv
+ >> compile -all
+ vsim work.KnightsTour_tb -voptargs=+acc -coverage
+ >> run -all
+ coverage report -output report.txt -instance=/tb_tasks -assert -directive -cvg -codeAll
+ // coverage report -output report.txt -instance=/tb_tasks -instance=/KnightsTour_tb -assert -directive -cvg -codeAll

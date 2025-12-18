@@ -1,0 +1,19 @@
+Coverage Report Summary Data by instance
+
+=================================================================================
+=== Instance: /tb_tasks
+=== Design Unit: work.tb_tasks
+=================================================================================
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Assertions                      15        15         0   100.00%
+    Branches                        27        22         5    81.48%
+    Conditions                      14         8         6    57.14%
+    Statements                      91        85         6    93.40%
+    Toggles                        324       176       148    54.32%
+
+
+TOTAL ASSERTION COVERAGE: 100.00%  ASSERTIONS: 15
+
+Total Coverage By Instance (filtered view): 77.27%
+

@@ -1,0 +1,57 @@
+
+State Machine - |KnightsTour|sponge:ISPNG|state
+Name state.note7 state.note6 state.note5 state.note4 state.note3 state.note2 state.note1 state.IDLE state.note8 
+state.IDLE 0 0 0 0 0 0 0 0 0 
+state.note1 0 0 0 0 0 0 1 1 0 
+state.note2 0 0 0 0 0 1 0 1 0 
+state.note3 0 0 0 0 1 0 0 1 0 
+state.note4 0 0 0 1 0 0 0 1 0 
+state.note5 0 0 1 0 0 0 0 1 0 
+state.note6 0 1 0 0 0 0 0 1 0 
+state.note7 1 0 0 0 0 0 0 1 0 
+state.note8 0 0 0 0 0 0 0 1 1 
+
+State Machine - |KnightsTour|inert_intf:iNEMO|state
+Name state.CAP_YAW_H state.CAP_YAW_L state.INT_ff2_WAIT state.INIT3 state.INIT2 state.INIT1 
+state.INIT1 0 0 0 0 0 0 
+state.INIT2 0 0 0 0 1 1 
+state.INIT3 0 0 0 1 0 1 
+state.INT_ff2_WAIT 0 0 1 0 0 1 
+state.CAP_YAW_L 0 1 0 0 0 1 
+state.CAP_YAW_H 1 0 0 0 0 1 
+
+State Machine - |KnightsTour|inert_intf:iNEMO|spi:ispi|state
+Name state.IDLE state.BACK_PORCH state.TRANSMITTING 
+state.IDLE 0 0 0 
+state.TRANSMITTING 1 0 1 
+state.BACK_PORCH 1 1 0 
+
+State Machine - |KnightsTour|inert_intf:iNEMO|inertial_integrator:iINT|state
+Name state.IDLE state.RUNNING state.CALIBRATING 
+state.IDLE 0 0 0 
+state.CALIBRATING 1 0 1 
+state.RUNNING 1 1 0 
+
+State Machine - |KnightsTour|TourCmd:iTC|state
+Name state.HR_MOVE state.HOLD_VT state.VT_MOVE state.IDLE state.HOLD_HR 
+state.IDLE 0 0 0 0 0 
+state.VT_MOVE 0 0 1 1 0 
+state.HOLD_VT 0 1 0 1 0 
+state.HR_MOVE 1 0 0 1 0 
+state.HOLD_HR 0 0 0 1 1 
+
+State Machine - |KnightsTour|TourLogic:iTL|state
+Name state.MAKE_MOVE state.POSSIBLE state.INIT state.IDLE state.BACK_UP 
+state.IDLE 0 0 0 0 0 
+state.INIT 0 0 1 1 0 
+state.POSSIBLE 0 1 0 1 0 
+state.MAKE_MOVE 1 0 0 1 0 
+state.BACK_UP 0 0 0 1 1 
+
+State Machine - |KnightsTour|cmd_proc:iCMD|state
+Name state.RAMP_UP state.MOV_CMD state.CAL state.IDLE state.RAMP_DOWN 
+state.IDLE 0 0 0 0 0 
+state.CAL 0 0 1 1 0 
+state.MOV_CMD 0 1 0 1 0 
+state.RAMP_UP 1 0 0 1 0 
+state.RAMP_DOWN 0 0 0 1 1 

@@ -1,0 +1,299 @@
+package tb_tasks;
+
+
+logic signed [11:0] err;
+logic [16:0] prev_omega;
+int cntrIR_n_count = 0;
+logic [14:0] prev_xx, prev_yy;
+logic [14:0] last_xx, last_yy;
+logic move_count;
+int num_moves = 0;
+logic [3:0] j, k;
+
+
+  ///////////////////////////////////////////////
+  /////// Initialize and Calibrate //////////////
+  ///////////////////////////////////////////////
+  
+  task automatic initialize(ref clk, RST_n, rst_n, send_cmd, [15:0]cmd, [7:0] resp, ref NEMO_setup, ref resp_rdy, ref logic rghtPWM, ref logic lftPWM);
+	 real Duty_lft, Duty_rght;
+	 cmd = 0;							//Initialize all stimulus to 0
+	 send_cmd = 0;
+	 RST_n = 0;							//simulate the RST_n button
+	 clk = 0;
+	 repeat (2) @(posedge clk);
+	 @(negedge clk) RST_n = 1;
+	 wait4sig(.clk(clk), .sig(rst_n));				//Wait for the actual rest 
+	 $display(" inital coordinates of X: 2800 ");
+	 $display(" inital coordinates of Y: 2800 "); 
+	 PWM_to_Duty(.PWM(lftPWM), .Duty(Duty_lft));
+	 PWM_to_Duty(.PWM(rghtPWM), .Duty(Duty_rght));
+	 assert(Duty_lft === Duty_rght)					//Both PWMs must be equal and at the midrail values
+	 	$display(" PWM is running and Duty is %f", Duty_rght);
+	
+	send_command(.cmd_to_snd(16'h2000),.send_cmd(send_cmd),.cmd(cmd),.clk(clk));					 //send the command to calibrate
+	calibrate(.clk(clk), .resp(resp), .NEMO_setup(NEMO_setup), .resp_rdy(resp_rdy), .cmd(cmd), .send_cmd(send_cmd)); //calibrate and wait for SPI internal signals to go high
+
+  endtask
+
+
+  task automatic calibrate(ref clk, [15:0]cmd, [7:0] resp, ref NEMO_setup, ref resp_rdy ,  send_cmd);
+          
+	 fork
+	  	begin: timeout							//Wait or Timeout for NEMO_setup inside SPI
+          		repeat (60000000) @(posedge clk);
+          		$display(" FAIL: Timed out waiting for NEMO_setup");
+	  	$stop();
+         	end
+	 	begin: check
+          		@(posedge NEMO_setup) disable timeout;
+          		$display(" SUCCESS: NEMO_setup is HIGH");
+	 	end
+	join
+
+	 check4resp(clk, resp_rdy, resp);					//On a cal done an acknowledgement of A5 should be received
+
+	 assert(resp == 8'ha5)
+	 	$display(" Success: Calibration done \n \n");
+	 else
+	 	$fatal(" Fail: Calibration Failed");
+
+  endtask
+	
+
+
+   //////////////////////////////////////////////////
+   //////// Testing with manual Commands  ///////////
+   //////////////////////////////////////////////////
+
+  //Task for checking that we reach the correct xx and yy coordinates after end of move  
+  task automatic X_Y_pos(ref logic clk, [15:0] cmd, [11:0] desired_heading, ref logic [7:0] resp, ref resp_rdy, ref reg [14:0] xx, yy); 
+	//Store the pevious xx and yy coordinates
+	last_xx = xx;
+	last_yy = yy;
+	//wait for the move to complete
+	wait4sig(.clk(clk), .sig(resp_rdy));
+	//Last 3 bits in command are squares to move, first three bits in xx and yy indicate current coords, add them based on heading ( N S W E ) and compute new coords	
+	case(desired_heading[11:4])
+		8'h00 : begin		//add squares to YY for NORTH move
+				 if((yy[14:12] === (last_yy[14:12] + cmd[2:0])) && (xx[14:12] === last_xx[14:12]))
+					move_count = 1;	
+			end
+		8'h3F : begin		//sub squares from XX for WEST move
+				 if((yy[14:12] === last_yy[14:12]) && (xx[14:12] === (last_xx[14:12] - cmd[2:0])))
+					move_count = 1;	
+			end
+		8'h7F : begin		//sub squares from YY for SOUTH move
+				 if((yy[14:12] === last_yy[14:12] - cmd[2:0]) && (xx[14:12] === last_xx[14:12]))
+					move_count = 1;	
+			end
+		8'hBF : begin		//add squares to XX for EAST move
+				 if((yy[14:12] === last_yy[14:12]) && (xx[14:12] === last_xx[14:12] + cmd[2:0]))
+					move_count = 1;	
+			end
+		endcase
+		//Check if we are in the centre of the square			 
+		assert(move_count && (yy[11:0] > 12'h600 && yy[11:0] < 12'h999) && (xx[11:0] > 12'h600 && xx[11:0] < 12'h999))
+			$display(" SUCCESS: X and Y coordinates are in expected range "); 
+		else 		
+			$error(" FAIL: X and Y coordinates not in expected range ");
+		
+		//print the current coordinates
+		$display(" \t Current X Coordinate: %h", xx);
+		$display(" \t Current Y Coordinate: %h", yy);
+		
+  endtask
+ 
+ //Based on heading check what is increasing when at full speed ( At full speed we don't want to go non-orthognal)
+  task automatic check_dirctn(ref [11:0] desired_heading, ref reg [9:0] frwrd, ref clk, ref reg [14:0] xx,yy);
+	
+	//store prevous xx and yy
+	prev_xx = xx;
+	prev_yy = yy;
+	//wait to attain the full speed
+	wait(frwrd === 12'h300);
+	//do the check based on heading yy inc. moving north, dec. moving south
+	case(desired_heading[11:4])
+		8'h00:	//north
+			assert($signed(yy) > $signed(prev_yy)) 
+				$display(" SUCCESS: Expected move: NORTH, Actual move: NORTH");
+			else 
+				$error(" Fail: Expected move: NORTH, Actual move: SOUTH");
+		8'h3f:  //west
+			assert($signed(xx) < $signed(prev_xx)) 
+				$display(" SUCCESS: Expected move: WEST, Actual move: WEST");
+			else 
+				$error(" Fail: Expected move: WEST, Actual move: EAST");
+		8'h7f:  //south
+			assert($signed(yy) < $signed(prev_yy)) 
+				$display(" SUCCESS: Expected move: SOUTH, Actual move: SOUTH ");
+			else 
+				$error(" Fail: Expected move: SOUTH, Actual move: NORTH");
+		8'hbf:  //east
+			assert($signed(xx) > $signed(prev_xx)) 
+				$display(" SUCCESS: Expected move: EAST, Actual move: EAST ");
+			else 
+				$error(" Fail: Expected move: EAST, Actual move: WEST");
+	endcase
+
+  endtask
+
+  //Task to check PWM values while turning
+  task automatic Duty_check(ref logic rghtPWM, ref logic lftPWM, logic signed [11:0] error, ref logic moving, ref clk);
+	real Duty_rght, Duty_lft;
+	wait4sig(.clk(clk), .sig(moving));
+	PWM_to_Duty(.PWM(lftPWM), .Duty(Duty_lft));
+	PWM_to_Duty(.PWM(rghtPWM), .Duty(Duty_rght));
+	if(error >= $signed(12'd800))						//if error is positive (mag>800) we should move right ( left duty more than right duty)
+		assert(Duty_rght < Duty_lft) 					//Moving Right
+			$display(" Change in Direction Detected: Moving Right, Right Duty: %f, Left Duty: %f", Duty_rght, Duty_lft);
+		else 
+			$error(" FAIL: Should move Right to reduce error but moved Left, Right Duty: %f, Left Duty: %f", Duty_rght, Duty_lft);
+	else if(error <= $signed(-12'd800))					//if error is negative (mag>800) we should move left ( right duty more than left duty)
+		assert(Duty_rght > Duty_lft) 					//Moving left
+			$display(" Change in Direction Detected: Moving Left, Right Duty: %f, Left Duty: %f", Duty_rght, Duty_lft);
+		else 
+			$error(" FAIL: Should move Left to reduce error but moved Right, Right Duty: %f, Left Duty: %f", Duty_rght, Duty_lft);
+  endtask 	
+  //Task to convert PWM_to_duty: basically calculates ON time period and OFF time period using PWM signal edges
+  task automatic PWM_to_Duty(ref logic PWM, output real Duty);
+	real time1, time2, Ton, Toff;
+	@(posedge PWM) time1 = $time;		//PWM rise edge time
+        @(negedge PWM) Ton = $time - time1;	//PWM fall edge time (get ON time)
+	time2 = $time;
+	@(posedge PWM) Toff = $time - time2;	//end of the other half (get OFF time)
+
+	Duty = Ton / (Ton + Toff);
+
+  endtask
+  //check the error at end of move, To cover : it started with the correct heading but did not move orthogonally
+  task automatic check_heading( ref logic signed [11:0] heading, ref [11:0] desired_heading);
+	err = desired_heading - heading;
+	assert( err >= $signed(-12'h040) && err <= $signed(12'h040))
+		$display(" SUCCESS: Heading reached Desired Heading, Heading: %h, Desired Heading: %h", heading, desired_heading);
+	else
+		$error(" FAIL: Unexpected Heading, Heading: %h, Desired Heading: %h", heading, desired_heading);
+	
+		$display(" \n \n ");
+  endtask
+  //Omega sum is close to zero when turning, and rising when moving forward, we check at max value of frwrd
+  task automatic check_omega(ref reg signed [16:0] omega_sum, ref reg [9:0] frwrd, ref logic moving);
+	@(posedge moving);
+        prev_omega = omega_sum;
+	wait(frwrd === 12'h300);
+	assert(omega_sum > prev_omega) 
+		$display(" SUCCESS: Omega Sum Ramped Up, initial Omega Sum: %h, current Omega Sum: %h", prev_omega, omega_sum);
+	else 
+		$error(" FAIL: Omega Sum does not Ramp Up, initial Omega Sum: %h, current Omega Sum: %h", prev_omega, omega_sum);
+  endtask
+  //A move always covers 1 or 2 squares -----> 2 or 4 cntr IR fires ( we can check for at least 2 ) 
+  task automatic cntrIR_n_fires(ref reg cntrIR_n, ref reg [15:0] cmd );
+	k = cmd[3:0]<<1;
+   	for (j = 0; j < k; j++)
+	 	@(posedge cntrIR_n) cntrIR_n_count++;
+	assert(cntrIR_n_count === 2*cmd[3:0]) 
+		$display(" SUCCESS: Center IR fired for %d times", cntrIR_n_count);
+	else
+		$error(" FAIL: Center IR does not fired for %d times", 2*cmd[3:0]);
+	
+	cntrIR_n_count = 0;
+  endtask
+  //Whenever move_with_fanfare is given fanfare_go must be asserted
+  task automatic check_fanfare(ref reg fanfare_go, ref reg [15:0] cmd);
+	if(cmd[15:12] === 4'h5) begin
+		wait(fanfare_go)
+		assert(fanfare_go === 1)
+			$display(" SUCCESS: Fanfare go is asserted ");
+		else
+			$error(" FAIL: Fanfare go is not asserted");
+	end
+
+  endtask
+
+
+   //////////////////////////////////////////////////
+   //////// Test with Tour command  /////////////////
+   //////////////////////////////////////////////////
+   //Count the moves during tour logic and check the reponse at the end of the last move
+   task automatic num_moves_TL(ref logic [7:0] resp, ref resp_rdy);//, ref reg fanfare_go);
+	
+	for(int i = 1; i < 48; i++)
+		@(posedge resp_rdy)
+		if(resp === 8'h5A) 				//Response at the end of tour logic is 5a
+			num_moves++;
+		if(num_moves === 47) begin			//A move is composed 48 moves
+			@(posedge resp_rdy);
+			num_moves++;
+			assert(resp === 8'hA5 && num_moves === 48) begin //Only if both conditions are satisfied
+			#10;	$display(" At Time: %t", $time);
+				$display(" SUCCESS: Knights Tour is Completed ");
+				$display(" SUCCESS: Number of moves made by Knight: %d", num_moves);
+				$display(" SUCCESS: Response: %h", resp);
+				end
+			else
+				$error(" FAIL: Knights Tour is incomplete");
+		end
+	
+
+   endtask
+
+   task automatic check_moves_tour_logic(ref reg [15:0] cmd, ref reg [14:0] xx,yy, ref resp_rdy, clk, logic [11:0] desired_heading, ref logic [7:0] resp);
+	int i = 0;
+	while( i < 48) begin
+		prev_xx = xx;
+		prev_yy = yy;
+		$display("Move number: %d, Command from tour cmd: %h", i, cmd);
+		X_Y_pos(.clk(clk), .cmd(cmd), .desired_heading(desired_heading), .resp(resp), .resp_rdy(resp_rdy),.xx(xx), .yy(yy));
+		$display("\n");
+		
+		i++;
+	end
+	
+   endtask
+
+  ///////////////////////////////////
+  ////////// Common Tasks  //////////
+  ///////////////////////////////////
+
+  //Task to Send a command and display it
+  task automatic send_command(ref send_cmd, clk, ref reg [15:0] cmd, input [15:0] cmd_to_snd);
+         cmd = cmd_to_snd;
+	 $display(" Command sent: %h", cmd);
+	 send_cmd = 1;
+	 @(posedge clk);
+	 send_cmd = 0;
+  endtask 
+  //Task to wait for resp_rdy and check response value
+  task automatic check4resp(ref logic clk, resp_rdy, [7:0] resp);
+	fork
+	 begin: timeout
+          repeat (60000000) @(posedge clk);
+          $display(" FAIL: Timed out waiting for response");
+	  $stop();
+         end
+	 begin: check
+          @(posedge resp_rdy)
+	  assert(resp === 8'ha5) begin
+		 disable timeout;
+		 $display(" SUCCESS: Response received = %h", resp);
+		end
+          else 
+		$error(" FAIL: Error at %t, Unintented response received", $time);
+	 end
+	join
+  endtask
+  //Simple wait for sig timeout task using fork join, wait for any general signal (sig)
+  task automatic wait4sig(ref logic clk, sig);
+	fork
+	 	begin: timeout
+          		repeat (60000000) @(posedge clk);
+          		$display(" FAIL: Timed out waiting for signal");
+	  	$stop();
+         	end
+	 	begin: check
+          		@(posedge sig) disable timeout;
+	 	end
+	join
+  endtask
+		
+endpackage

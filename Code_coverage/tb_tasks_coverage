@@ -1,0 +1,39 @@
+Recursive Coverage Report Summary Data by instance
+
+=================================================================================
+=== Instance: /KnightsTour_tb/iDUT
+=== Design Unit: work.KnightsTour
+=================================================================================
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                       431       425         6    98.60%
+    Conditions                      67        56        11    83.58%
+    Statements                     542       539         3    99.44%
+    Toggles                       2652      2334       318    88.00%
+
+=================================================================================
+=== Instance: /KnightsTour_tb
+=== Design Unit: work.KnightsTour_tb
+=================================================================================
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                       507       498         9    98.22%
+    Conditions                      78        66        12    84.61%
+    Statements                     649       646         3    99.53%
+    Toggles                       3038      2699       339    88.84%
+
+=================================================================================
+=== Instance: /tb_tasks
+=== Design Unit: work.tb_tasks
+=================================================================================
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Assertions                      15        15         0   100.00%
+    Branches                        27        18         9    66.66%
+    Conditions                      13         2        11    15.38%
+    Statements                      81        75         6    92.59%
+    Toggles                        308       156       152    50.64%
+
+
+Total Coverage By Instance (filtered view): 91.08%
+

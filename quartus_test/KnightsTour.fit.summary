@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Dec  7 01:11:32 2024
+Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+Revision Name : KnightsTour
+Top-level Entity Name : KnightsTour
+Family : Cyclone IV E
+Device : EP4CE22F17C6
+Timing Models : Final
+Total logic elements : 1,621 / 22,320 ( 7 % )
+    Total combinational functions : 1,465 / 22,320 ( 7 % )
+    Dedicated logic registers : 852 / 22,320 ( 4 % )
+Total registers : 852
+Total pins : 19 / 154 ( 12 % )
+Total virtual pins : 0
+Total memory bits : 0 / 608,256 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

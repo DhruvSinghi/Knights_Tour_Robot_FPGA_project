@@ -1,0 +1,102 @@
+module TourCmd(
+    input clk,
+    input rst_n,
+    input start_tour,
+    input [7:0] move,
+    input [15:0] cmd_UART,
+    input cmd_rdy_UART,
+    input clr_cmd_rdy,
+    input send_resp,
+    output logic [15:0] cmd,
+    output logic cmd_rdy,
+    output logic [4:0] mv_indx,
+    output [7:0] resp
+);
+
+    logic init;
+    logic vh;
+    logic inc_cntr;
+    logic [15:0] cmd_logic;
+    logic cmd_rdy_logic;
+    logic uart_sel;
+
+    always_ff @(posedge clk, negedge rst_n)
+        if(!rst_n)
+            mv_indx <= '0;
+        else if(init)
+            mv_indx <= '0;
+        else if(inc_cntr)
+            mv_indx <= mv_indx + 1;
+
+    ///////////TO CMD PROC/////////////
+    assign cmd_logic[15:12] = (vh) ? (4'b0100) : (4'b0101);
+    assign cmd_logic[11:4] = (vh) ? ((|move[6:3]) ? 8'h7f : 8'h00) : ((|move[4:1]) ? 8'h3f : 8'hbf);
+
+    assign cmd_logic[3:0] = (vh) ? (((|move[5:4]) || (|move[1:0])) ? 4'h2 : 4'h1) : (((|move[7:6]) || (|move[3:2])) ? 4'h2 : 4'h1);
+
+    assign {cmd,cmd_rdy} = (uart_sel) ? {cmd_UART,cmd_rdy_UART} : {cmd_logic,cmd_rdy_logic};
+
+    assign resp = uart_sel ? 8'ha5: ((mv_indx == 5'd23) && !vh ) ? 8'ha5 : 8'h5a;
+
+    typedef enum reg [2:0] {IDLE,VT_MOVE,HOLD_VT,HR_MOVE,HOLD_HR} state_t;
+    state_t state, nxt_state;
+
+    always_ff @(posedge clk, negedge rst_n)
+        if(!rst_n)
+            state <= IDLE;
+        else
+            state <= nxt_state;
+
+    always_comb begin
+        vh = 'h0;
+        uart_sel = 'h0;
+        cmd_rdy_logic = 'h0;
+        inc_cntr = 'h0;
+        init = 'h0;
+        nxt_state = state;
+
+        case(state)
+            default: begin
+                uart_sel = 1;
+                if(start_tour) begin
+                    init = 1;
+                    nxt_state = VT_MOVE;
+                end
+            end
+
+            VT_MOVE: begin
+                vh = 1;
+                cmd_rdy_logic = 1;
+                if(clr_cmd_rdy) begin
+                    vh = 1;
+                    nxt_state = HOLD_VT;
+                end
+            end
+
+            HOLD_VT: begin
+                vh = 1;
+                if(send_resp)
+                    nxt_state = HR_MOVE;
+            end
+
+            HR_MOVE: begin
+                cmd_rdy_logic = 1;
+                if(clr_cmd_rdy)
+                    nxt_state = HOLD_HR;
+            end
+
+            HOLD_HR:
+            if(send_resp) begin
+                if(mv_indx == 5'd23)
+                    nxt_state = IDLE;
+                else begin
+                    nxt_state = VT_MOVE;
+                    inc_cntr = 1;
+                end
+            end
+        endcase
+    end
+endmodule
+
+
+

@@ -1,0 +1,728 @@
+m255
+K4
+z2
+Z0 !s12c _opt
+Z1 !s99 nomlopt
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+!s11f vlog 2023.2_1 2023.05, May 12 2023
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/filespace/s/singhi
+T_opt
+!s110 1733697984
+V1=N9d6INYRNgjlGmJfKGR0
+04 14 4 work KnightsTour_tb fast 0
+=3-000ae431a4f1-675621bf-c2cfb-69b87
+R1
+!s12b OEM100
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+OE;O;2023.2_1;77
+vcmd_proc
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/cmd_proc.sv
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z4 !s110 1733697975
+!i10b 1
+!s100 bb=@gQY<;XlOga;IYE^XI2
+IMRSjk5C9J;elnWOm`llPV0
+S1
+Z5 d/filespace/s/singhi/ECE551/project/Project_mark1_indented
+w1733695796
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/cmd_proc.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/cmd_proc.sv
+!i122 924
+L0 1 200
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 OE;L;2023.2_1;77
+r1
+!s85 0
+31
+Z8 !s108 1733697975.000000
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/cmd_proc.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/cmd_proc.sv|
+!i113 0
+Z9 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vinert_intf
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/inert_intf.sv
+R3
+R4
+!i10b 1
+!s100 PQjAPITYSf5>]9bA_UYSP0
+IbJ1ZPLCD;g0i994MDN]QA0
+S1
+R5
+w1733446914
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/inert_intf.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/inert_intf.sv
+!i122 925
+L0 7 138
+R6
+R7
+r1
+!s85 0
+31
+R8
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/inert_intf.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/inert_intf.sv|
+!i113 0
+R9
+R2
+vinertial_integrator
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/inertial_integrator.sv
+R3
+R4
+!i10b 1
+!s100 3FbGb5;;nC8i7zZaBa][Y1
+Io[i0a7lZabn621zfnE=@41
+S1
+R5
+w1733532638
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/inertial_integrator.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/inertial_integrator.sv
+!i122 926
+L0 1 199
+R6
+R7
+r1
+!s85 0
+31
+R8
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/inertial_integrator.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/inertial_integrator.sv|
+!i113 0
+R9
+R2
+vinverse_PWM11e
+Z10 2/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightPhysics.sv
+R3
+R4
+!i10b 1
+!s100 fggLe>ATJaiXUld50SO:a3
+If<Pd;=Z@^@XEE^B]l9>?E0
+S1
+R5
+Z11 w1733466452
+Z12 8/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightPhysics.sv
+Z13 F/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightPhysics.sv
+!i122 928
+L0 266 49
+R6
+R7
+r1
+!s85 0
+31
+R8
+Z14 !s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightPhysics.sv|
+Z15 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightPhysics.sv|
+!i113 0
+R9
+R2
+ninverse_@p@w@m11e
+vIR_intf
+Z16 2/filespace/s/singhi/ECE551/project/Project_mark1_indented/IR_intf.sv
+R3
+R4
+!i10b 1
+!s100 7mglz7hi;<em`_KiN9FD;3
+I?MKQn4Q<>fNo@R_ge3^Po2
+S1
+R5
+Z17 w1733444938
+Z18 8/filespace/s/singhi/ECE551/project/Project_mark1_indented/IR_intf.sv
+Z19 F/filespace/s/singhi/ECE551/project/Project_mark1_indented/IR_intf.sv
+!i122 927
+Z20 L0 1 118
+R6
+R7
+r1
+!s85 0
+31
+R8
+Z21 !s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/IR_intf.sv|
+Z22 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/IR_intf.sv|
+!i113 0
+R9
+R2
+n@i@r_intf
+vKnightPhysics
+R10
+R3
+R4
+!i10b 1
+!s100 Q0DEFea=AX=E8hNFV[S2E0
+IXn;VB:`K8>^QlU:gJ5Yee2
+S1
+R5
+R11
+R12
+R13
+!i122 928
+L0 1 261
+R6
+R7
+r1
+!s85 0
+31
+R8
+R14
+R15
+!i113 0
+R9
+R2
+n@knight@physics
+vKnightsTour
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour.sv
+R3
+R4
+!i10b 1
+!s100 b00F5Rd9WEB4<k5@1gknF1
+IU81M;=hjk[ATCV>DPWlh]2
+S1
+R5
+w1733442777
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour.sv
+!i122 929
+R20
+R6
+R7
+r1
+!s85 0
+31
+R8
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour.sv|
+!i113 0
+R9
+R2
+n@knights@tour
+vKnightsTour_tb
+Z23 2/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv
+R3
+Z24 DXx4 work 8 tb_tasks 0 22 5cB2fF3NZmD;K8SbazAHo3
+DXx4 work 22 KnightsTour_tb_sv_unit 0 22 B1m9:TdW@9:A5CN?A0iSY3
+Z25 !s110 1733697976
+R6
+r1
+!s85 0
+!i10b 1
+!s100 3j8]X=cnlbhoLGmSEbnVU2
+IHEMO_kJbAY61eSe6<FKAd3
+!s105 KnightsTour_tb_sv_unit
+S1
+R5
+Z26 w1733697972
+Z27 8/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv
+Z28 F/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv
+!i122 930
+L0 3 144
+R7
+31
+R8
+Z29 !s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv|
+Z30 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv|
+!i113 0
+R9
+R2
+n@knights@tour_tb
+XKnightsTour_tb_sv_unit
+R23
+R3
+R24
+R25
+VB1m9:TdW@9:A5CN?A0iSY3
+r1
+!s85 0
+!i10b 1
+!s100 ^b5U=7`4@V^8>jdUDdg<?0
+IB1m9:TdW@9:A5CN?A0iSY3
+!i103 1
+S1
+R5
+R26
+R27
+R28
+!i122 930
+L0 2 0
+R7
+31
+R8
+R29
+R30
+!i113 0
+R9
+R2
+n@knights@tour_tb_sv_unit
+vMtrDrv
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/MtrDrv.sv
+R3
+R25
+!i10b 1
+!s100 ^BFUgKk0P0iVM5moFTB^e2
+IVLmVT6:6cMddOmo1m@c^40
+S1
+R5
+w1733444965
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/MtrDrv.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/MtrDrv.sv
+!i122 931
+Z31 L0 1 26
+R6
+R7
+r1
+!s85 0
+31
+Z32 !s108 1733697976.000000
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/MtrDrv.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/MtrDrv.sv|
+!i113 0
+R9
+R2
+n@mtr@drv
+vPID
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/PID.sv
+R3
+R25
+!i10b 1
+!s100 OaLam65zD3g5bX9fLbNBd2
+IX_ALP85hC`o4Pe`F<<fBE3
+S1
+R5
+w1733555004
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/PID.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/PID.sv
+!i122 932
+L0 1 159
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/PID.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/PID.sv|
+!i113 0
+R9
+R2
+n@p@i@d
+vPWM
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/PWM.sv
+R3
+R25
+!i10b 1
+!s100 OCmif:U_3jE]A<:`lBnA30
+I1azlz<SEDbi`eW_c7lF=l3
+S1
+R5
+w1733463195
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/PWM.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/PWM.sv
+!i122 933
+R31
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/PWM.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/PWM.sv|
+!i113 0
+R9
+R2
+n@p@w@m
+vPWM3
+R16
+R3
+R4
+!i10b 1
+!s100 @8CW?QZ]3j9:>[5;;@SWP3
+I<b:debE?9?OTlU:a?DP=12
+S1
+R5
+R17
+R18
+R19
+!i122 927
+L0 124 33
+R6
+R7
+r1
+!s85 0
+31
+R8
+R21
+R22
+!i113 0
+R9
+R2
+n@p@w@m3
+vRemoteComm_e
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/RemoteComm.sv
+R3
+R25
+!i10b 1
+!s100 E@`A2X:83Sb3WE^>zJTU^2
+I@8Q3]HQf7FR[O5Nk4?ZGO0
+S1
+R5
+w1733463132
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/RemoteComm.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/RemoteComm.sv
+!i122 934
+L0 1 88
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/RemoteComm.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/RemoteComm.sv|
+!i113 0
+R9
+R2
+n@remote@comm_e
+vrst_synch
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/rst_synch.sv
+R3
+R25
+!i10b 1
+!s100 dBXImGb=P<F`z?zlWMDAY0
+IC^8]nQOb]U`X:Q_;DUNA[3
+S1
+R5
+w1733456979
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/rst_synch.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/rst_synch.sv
+!i122 935
+L0 1 22
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/rst_synch.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/rst_synch.sv|
+!i113 0
+R9
+R2
+vspi
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/spi.sv
+R3
+R25
+!i10b 1
+!s100 0Xn9GRaNb6i<_b85fa0bZ2
+IXA>lS2fgleAMfSe1^bnDB0
+S1
+R5
+w1733462349
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/spi.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/spi.sv
+!i122 936
+R20
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/spi.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/spi.sv|
+!i113 0
+R9
+R2
+vSPI_iNEMO4
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/SPI_iNEMO4.sv
+R3
+R25
+!i10b 1
+!s100 <_?HGJ:6F<O=^?eGY;99A1
+I>cIzzTLVh?DRWhlPm1cjA3
+S1
+R5
+w1733463856
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/SPI_iNEMO4.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/SPI_iNEMO4.sv
+!i122 937
+L0 2 194
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/SPI_iNEMO4.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/SPI_iNEMO4.sv|
+!i113 0
+R9
+R2
+n@s@p@i_i@n@e@m@o4
+vsponge
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/sponge.sv
+R3
+R25
+!i10b 1
+!s100 fdF5:eX^cfeJ`cRGNE[Ed2
+IPnci<m]nn6k`CQ4PVHk8F3
+S1
+R5
+w1733696970
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/sponge.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/sponge.sv
+!i122 938
+L0 14 132
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/sponge.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/sponge.sv|
+!i113 0
+R9
+R2
+Xtb_tasks
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/tb_tasks.sv
+R3
+R25
+!i10b 1
+!s100 N3lhIbU73f7Em=eb2Bagc1
+I5cB2fF3NZmD;K8SbazAHo3
+S1
+R5
+w1733695893
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/tb_tasks.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/tb_tasks.sv
+!i122 939
+L0 1 0
+V5cB2fF3NZmD;K8SbazAHo3
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/tb_tasks.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-cover|sbcet3|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/tb_tasks.sv|
+!i113 0
+!s102 -cover sbcet3
+o-work work -sv -cover sbcet3 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+vTourCmd
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourCmd.sv
+R3
+R25
+!i10b 1
+!s100 :[AG=2UNR<e3F36X2ZE6D3
+IKb_EDME03KMB_HI[`8C9F0
+S1
+R5
+w1733552183
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourCmd.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourCmd.sv
+!i122 940
+L0 1 99
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/TourCmd.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourCmd.sv|
+!i113 0
+R9
+R2
+n@tour@cmd
+vTourLogic
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourLogic.sv
+R3
+R25
+!i10b 1
+!s100 N>0=76Dj>Mn@PQ:@Q9zn22
+IeUEk_HaSMmA1@ECP?fGlG1
+S1
+R5
+w1733455897
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourLogic.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourLogic.sv
+!i122 941
+L0 1 248
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/TourLogic.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/TourLogic.sv|
+!i113 0
+R9
+R2
+n@tour@logic
+vUART
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART.sv
+R3
+R25
+!i10b 1
+!s100 ]dX65Y=BIzch^@e3@`PGQ2
+ICfNBgeL9igQ0[kJNbjZ?72
+S1
+R5
+w1733455074
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART.sv
+!i122 942
+L0 1 21
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/UART.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART.sv|
+!i113 0
+R9
+R2
+n@u@a@r@t
+vUART_rx
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_rx.sv
+R3
+R25
+!i10b 1
+!s100 0TOffK>[MK>4Sag=TF7KT3
+IYlPTOHS8@9P2g1MmAZ`m@3
+S1
+R5
+w1733454767
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_rx.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_rx.sv
+!i122 943
+L0 8 119
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_rx.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_rx.sv|
+!i113 0
+R9
+R2
+n@u@a@r@t_rx
+vUART_tx
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_tx.sv
+R3
+R25
+!i10b 1
+!s100 idO=2V>IBQTkg9>[IV4f:2
+I?`Kz8ODJLP=B9bU2f1:0c1
+S1
+R5
+w1733454325
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_tx.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_tx.sv
+!i122 944
+L0 8 109
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_tx.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_tx.sv|
+!i113 0
+R9
+R2
+n@u@a@r@t_tx
+vUART_wrapper
+2/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_wrapper.sv
+R3
+R25
+!i10b 1
+!s100 YCYlNI@lVIeLfN5HBGi3`1
+Id6_CGZ:jY0k54C9K:;n5W0
+S1
+R5
+w1733448629
+8/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_wrapper.sv
+F/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_wrapper.sv
+!i122 945
+L0 1 79
+R6
+R7
+r1
+!s85 0
+31
+R32
+!s107 /filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_wrapper.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/filespace/s/singhi/ECE551/project/Project_mark1_indented/UART_wrapper.sv|
+!i113 0
+R9
+R2
+n@u@a@r@t_wrapper

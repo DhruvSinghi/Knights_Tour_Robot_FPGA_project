@@ -1,0 +1,4 @@
+Info (10281): Verilog HDL Declaration information at rst_synch.sv(2): object "RST_n" differs only in case from object "rst_n" in the same scope File: I:/ECE551/project/quartus_test/rst_synch.sv Line: 2
+Info (10281): Verilog HDL Declaration information at KnightsTour.sv(2): object "RST_n" differs only in case from object "rst_n" in the same scope File: I:/ECE551/project/quartus_test/KnightsTour.sv Line: 2
+Info (10281): Verilog HDL Declaration information at cmd_proc.sv(17): object "tour_go" differs only in case from object "TOUR_GO" in the same scope File: I:/ECE551/project/quartus_test/cmd_proc.sv Line: 17
+Info (10281): Verilog HDL Declaration information at TourLogic.sv(35): object "init" differs only in case from object "INIT" in the same scope File: I:/ECE551/project/quartus_test/TourLogic.sv Line: 35

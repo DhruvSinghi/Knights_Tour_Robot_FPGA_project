@@ -1,0 +1,572 @@
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project simulation_mark1_intended
+# Optimization canceled
+ vlog -cover bcst KnightsTour_tb.sv
+# QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+# Start time: 01:42:36 on Dec 07,2024
+# vlog -reportprogress 300 -cover bcst KnightsTour_tb.sv 
+# ** Warning: KnightsTour_tb.sv(2): (vlog-13233) Design unit "KnightsTour_tb_sv_unit" already exists and will be overwritten. Overwriting SystemVerilog $unit with different source files.
+# -- Compiling package KnightsTour_tb_sv_unit
+# -- Importing package tb_tasks
+# -- Compiling module KnightsTour_tb
+# 
+# Top level modules:
+# 	KnightsTour_tb
+# End time: 01:42:36 on Dec 07,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# Compile of cmd_proc.sv was successful.
+# Compile of inert_intf.sv was successful.
+# Compile of inertial_integrator.sv was successful.
+# Compile of IR_intf.sv was successful.
+# Compile of KnightPhysics.sv was successful.
+# Compile of KnightsTour.sv was successful.
+# Compile of KnightsTour_tb.sv was successful with warnings.
+# Compile of MtrDrv.sv was successful.
+# Compile of PID.sv was successful.
+# Compile of PWM.sv was successful.
+# Compile of RemoteComm.sv was successful.
+# Compile of rst_synch.sv was successful.
+# Compile of spi.sv was successful.
+# Compile of SPI_iNEMO4.sv was successful.
+# Compile of sponge.sv was successful.
+# Compile of tb_tasks.sv was successful.
+# Compile of TourCmd.sv was successful.
+# Compile of TourLogic.sv was successful.
+# Compile of UART.sv was successful.
+# Compile of UART_rx.sv was successful.
+# Compile of UART_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 22 compiles, 0 failed with no errors.
+ vlog -cover bcst KnightsTour_tb.sv tb_tasks.sv
+# QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+# Start time: 01:42:58 on Dec 07,2024
+# vlog -reportprogress 300 -cover bcst KnightsTour_tb.sv tb_tasks.sv 
+# ** Warning: KnightsTour_tb.sv(2): (vlog-13233) Design unit "KnightsTour_tb_sv_unit" already exists and will be overwritten. Overwriting SystemVerilog $unit with different source files.
+# -- Compiling package KnightsTour_tb_sv_unit
+# -- Importing package tb_tasks
+# -- Compiling module KnightsTour_tb
+# -- Compiling package tb_tasks
+# 
+# Top level modules:
+# 	KnightsTour_tb
+# End time: 01:42:58 on Dec 07,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# Compile of cmd_proc.sv was successful.
+# Compile of inert_intf.sv was successful.
+# Compile of inertial_integrator.sv was successful.
+# Compile of IR_intf.sv was successful.
+# Compile of KnightPhysics.sv was successful.
+# Compile of KnightsTour.sv was successful.
+# Compile of KnightsTour_tb.sv was successful with warnings.
+# Compile of MtrDrv.sv was successful.
+# Compile of PID.sv was successful.
+# Compile of PWM.sv was successful.
+# Compile of RemoteComm.sv was successful.
+# Compile of rst_synch.sv was successful.
+# Compile of spi.sv was successful.
+# Compile of SPI_iNEMO4.sv was successful.
+# Compile of sponge.sv was successful.
+# Compile of tb_tasks.sv was successful.
+# Compile of TourCmd.sv was successful.
+# Compile of TourLogic.sv was successful.
+# Compile of UART.sv was successful.
+# Compile of UART_rx.sv was successful.
+# Compile of UART_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 22 compiles, 0 failed with no errors.
+vsim work.KnightsTour_tb -voptargs=+acc
+# vsim work.KnightsTour_tb -voptargs="+acc" 
+# Start time: 01:43:37 on Dec 07,2024
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.tb_tasks(fast)
+# Loading work.KnightsTour_tb_sv_unit(fast)
+# Loading work.KnightsTour_tb(fast)
+# Loading work.KnightsTour(fast)
+# Loading work.rst_synch(fast)
+# Loading work.UART_wrapper(fast)
+# Loading work.UART(fast)
+# Loading work.UART_tx(fast)
+# Loading work.UART_rx(fast)
+# Loading work.cmd_proc(fast)
+# Loading work.TourLogic(fast)
+# Loading work.TourCmd(fast)
+# Loading work.inert_intf(fast)
+# Loading work.inertial_integrator(fast)
+# Loading work.spi(fast)
+# Loading work.PID(fast)
+# Loading work.MtrDrv(fast)
+# Loading work.PWM(fast)
+# Loading work.IR_intf(fast)
+# Loading work.PWM3(fast)
+# Loading work.sponge(fast)
+# Loading work.RemoteComm_e(fast)
+# Loading work.KnightPhysics(fast)
+# Loading work.SPI_iNEMO4(fast)
+# Loading work.inverse_PWM11e(fast)
+quit -sim
+# End time: 01:43:46 on Dec 07,2024, Elapsed time: 0:00:09
+# Errors: 0, Warnings: 3
+# Load canceled
+# Optimization canceled
+vsim work.KnightsTour_tb -voptargs=+acc -coverage
+# vsim work.KnightsTour_tb -voptargs="+acc" -coverage 
+# Start time: 01:44:17 on Dec 07,2024
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.tb_tasks(fast)
+# Loading work.KnightsTour_tb_sv_unit(fast)
+# Loading work.KnightsTour_tb(fast)
+# Loading work.KnightsTour(fast)
+# Loading work.rst_synch(fast)
+# Loading work.UART_wrapper(fast)
+# Loading work.UART(fast)
+# Loading work.UART_tx(fast)
+# Loading work.UART_rx(fast)
+# Loading work.cmd_proc(fast)
+# Loading work.TourLogic(fast)
+# Loading work.TourCmd(fast)
+# Loading work.inert_intf(fast)
+# Loading work.inertial_integrator(fast)
+# Loading work.spi(fast)
+# Loading work.PID(fast)
+# Loading work.MtrDrv(fast)
+# Loading work.PWM(fast)
+# Loading work.IR_intf(fast)
+# Loading work.PWM3(fast)
+# Loading work.sponge(fast)
+# Loading work.RemoteComm_e(fast)
+# Loading work.KnightPhysics(fast)
+# Loading work.SPI_iNEMO4(fast)
+# Loading work.inverse_PWM11e(fast)
+run -all
+#  inital coordinates of X: 2800 
+#  inital coordinates of Y: 2800 
+#  PWM is running and Duty is 0.500000
+#  Command sent: 2000
+#  SUCCESS: NEMO_setup is HIGH
+#  SUCCESS: Response received = a5
+#  Success: Calibration done 
+#  
+# 
+#  Command sent: 4001
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 00334, current Omega Sum: 0a2eb
+#  SUCCESS: Expected move: NORTH, Actual move: NORTH
+#  SUCCESS: Center IR fired for           2 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2800
+#  	 Current Y Coordinate: 3682
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: 000, Desired Heading: 000
+#  
+#  
+#  
+#  Command sent: 4bf1
+#  Change in Direction Detected: Moving Right, Right Duty: 0.196289, Left Duty: 0.803711
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08ab4, current Omega Sum: 0a19c
+#  SUCCESS: Expected move: EAST, Actual move: EAST 
+#  SUCCESS: Center IR fired for           2 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3684
+#  	 Current Y Coordinate: 37cb
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: be8, Desired Heading: bff
+#  
+#  
+#  
+#  Command sent: 47f1
+#  Change in Direction Detected: Moving Right, Right Duty: 0.305176, Left Duty: 0.694824
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08a1c, current Omega Sum: 0a192
+#  SUCCESS: Expected move: SOUTH, Actual move: SOUTH 
+#  SUCCESS: Center IR fired for           2 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 37c0
+#  	 Current Y Coordinate: 2965
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: 7e9, Desired Heading: 7ff
+#  
+#  
+#  
+#  Command sent: 43f1
+#  Change in Direction Detected: Moving Right, Right Duty: 0.305176, Left Duty: 0.694824
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08a29, current Omega Sum: 0a18e
+#  SUCCESS: Expected move: WEST, Actual move: WEST
+#  SUCCESS: Center IR fired for           2 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2984
+#  	 Current Y Coordinate: 283a
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: 3c9, Desired Heading: 3ff
+#  
+#  
+#  
+#  Command sent: 5002
+#  Change in Direction Detected: Moving Right, Right Duty: 0.305176, Left Duty: 0.694824
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08890, current Omega Sum: 0a196
+#  SUCCESS: Expected move: NORTH, Actual move: NORTH
+#  SUCCESS: Fanfare go is asserted 
+#  SUCCESS: Center IR fired for           4 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 28d7
+#  	 Current Y Coordinate: 467e
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: fe7, Desired Heading: 000
+#  
+#  
+#  
+#  Command sent: 53f2
+#  Change in Direction Detected: Moving Left, Right Duty: 0.804688, Left Duty: 0.195312
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08a8c, current Omega Sum: 096a8
+#  SUCCESS: Expected move: WEST, Actual move: WEST
+#  SUCCESS: Fanfare go is asserted 
+#  SUCCESS: Center IR fired for           4 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 0972
+#  	 Current Y Coordinate: 4711
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: 3df, Desired Heading: 3ff
+#  
+#  
+#  
+#  Command sent: 57f2
+#  Change in Direction Detected: Moving Left, Right Duty: 0.804688, Left Duty: 0.195312
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 0887e, current Omega Sum: 0a188
+#  SUCCESS: Expected move: SOUTH, Actual move: SOUTH 
+#  SUCCESS: Fanfare go is asserted 
+#  SUCCESS: Center IR fired for           4 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 0845
+#  	 Current Y Coordinate: 2986
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: 7f9, Desired Heading: 7ff
+#  
+#  
+#  
+#  Command sent: 5bf2
+#  Change in Direction Detected: Moving Left, Right Duty: 0.804688, Left Duty: 0.195312
+#  SUCCESS: Omega Sum Ramped Up, initial Omega Sum: 08a3d, current Omega Sum: 0a185
+#  SUCCESS: Expected move: EAST, Actual move: EAST 
+#  SUCCESS: Fanfare go is asserted 
+#  SUCCESS: Center IR fired for           4 times
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2671
+#  	 Current Y Coordinate: 28ef
+#  SUCCESS: Response received = a5
+#  SUCCESS: Heading reached Desired Heading, Heading: bfd, Desired Heading: bff
+#  
+#  
+#  
+#  Command sent: 6022
+# Move number:           0, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 28aa
+#  	 Current Y Coordinate: 4696
+# 
+# 
+# Move number:           1, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3686
+#  	 Current Y Coordinate: 480e
+# 
+# 
+# Move number:           2, Command from tour cmd: 47f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3744
+#  	 Current Y Coordinate: 3966
+# 
+# 
+# Move number:           3, Command from tour cmd: 53f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 198a
+#  	 Current Y Coordinate: 3711
+# 
+# 
+# Move number:           4, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 18b4
+#  	 Current Y Coordinate: 195b
+# 
+# 
+# Move number:           5, Command from tour cmd: 53f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 7985
+#  	 Current Y Coordinate: 1711
+# 
+# 
+# Move number:           6, Command from tour cmd: 47f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 78b4
+#  	 Current Y Coordinate: 095e
+# 
+# 
+# Move number:           7, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 167e
+#  	 Current Y Coordinate: 08ef
+# 
+# 
+# Move number:           8, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 178a
+#  	 Current Y Coordinate: 169e
+# 
+# 
+# Move number:           9, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 367c
+#  	 Current Y Coordinate: 18ef
+# 
+# 
+# Move number:          10, Command from tour cmd: 4002
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 38ef
+#  	 Current Y Coordinate: 3691
+# 
+# 
+# Move number:          11, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 297d
+#  	 Current Y Coordinate: 3711
+# 
+# 
+# Move number:          12, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 28ef
+#  	 Current Y Coordinate: 4681
+# 
+# 
+# Move number:          13, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 1960
+#  	 Current Y Coordinate: 4711
+# 
+# 
+# Move number:          14, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 187c
+#  	 Current Y Coordinate: 296a
+# 
+# 
+# Move number:          15, Command from tour cmd: 53f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 796f
+#  	 Current Y Coordinate: 2711
+# 
+# 
+# Move number:          16, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 78b1
+#  	 Current Y Coordinate: 0967
+# 
+# 
+# Move number:          17, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 067f
+#  	 Current Y Coordinate: 08ef
+# 
+# 
+# Move number:          18, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 08ef
+#  	 Current Y Coordinate: 1699
+# 
+# 
+# Move number:          19, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 26a2
+#  	 Current Y Coordinate: 18dc
+# 
+# 
+# Move number:          20, Command from tour cmd: 4002
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2819
+#  	 Current Y Coordinate: 3686
+# 
+# 
+# Move number:          21, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 36a0
+#  	 Current Y Coordinate: 3899
+# 
+# 
+# Move number:          22, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 37ca
+#  	 Current Y Coordinate: 4694
+# 
+# 
+# Move number:          23, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 298b
+#  	 Current Y Coordinate: 4711
+# 
+# 
+# Move number:          24, Command from tour cmd: 47f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2865
+#  	 Current Y Coordinate: 3961
+# 
+# 
+# Move number:          25, Command from tour cmd: 53f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 095a
+#  	 Current Y Coordinate: 3768
+# 
+# 
+# Move number:          26, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 0875
+#  	 Current Y Coordinate: 198a
+# 
+# 
+# Move number:          27, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 16a1
+#  	 Current Y Coordinate: 1847
+# 
+# 
+# Move number:          28, Command from tour cmd: 47f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 179a
+#  	 Current Y Coordinate: 0971
+# 
+# 
+# Move number:          29, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3671
+#  	 Current Y Coordinate: 08f1
+# 
+# 
+# Move number:          30, Command from tour cmd: 4002
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 38ef
+#  	 Current Y Coordinate: 2695
+# 
+# 
+# Move number:          31, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 4672
+#  	 Current Y Coordinate: 2881
+# 
+# 
+# Move number:          32, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 47ae
+#  	 Current Y Coordinate: 3684
+# 
+# 
+# Move number:          33, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3976
+#  	 Current Y Coordinate: 374b
+# 
+# 
+# Move number:          34, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 38ef
+#  	 Current Y Coordinate: 466f
+# 
+# 
+# Move number:          35, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2967
+#  	 Current Y Coordinate: 470f
+# 
+# 
+# Move number:          36, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 2863
+#  	 Current Y Coordinate: 2967
+# 
+# 
+# Move number:          37, Command from tour cmd: 5bf1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3684
+#  	 Current Y Coordinate: 27c0
+# 
+# 
+# Move number:          38, Command from tour cmd: 47f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 37cc
+#  	 Current Y Coordinate: 0990
+# 
+# 
+# Move number:          39, Command from tour cmd: 53f2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 1976
+#  	 Current Y Coordinate: 0711
+# 
+# 
+# Move number:          40, Command from tour cmd: 4001
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 18f1
+#  	 Current Y Coordinate: 16a0
+# 
+# 
+# Move number:          41, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3694
+#  	 Current Y Coordinate: 18ef
+# 
+# 
+# Move number:          42, Command from tour cmd: 47f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 3899
+#  	 Current Y Coordinate: 0962
+# 
+# 
+# Move number:          43, Command from tour cmd: 5bf2
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 5693
+#  	 Current Y Coordinate: 08ef
+# 
+# 
+# Move number:          44, Command from tour cmd: 4002
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 58bf
+#  	 Current Y Coordinate: 269e
+# 
+# 
+# Move number:          45, Command from tour cmd: 53f1
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 495e
+#  	 Current Y Coordinate: 2711
+# 
+# 
+# Move number:          46, Command from tour cmd: 4002
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 48ef
+#  	 Current Y Coordinate: 4688
+# 
+# 
+# Move number:          47, Command from tour cmd: 5bf1
+#  At Time:        2404620365000
+#  SUCCESS: Knights Tour is Completed 
+#  SUCCESS: Number of moves made by Knight:          48
+#  SUCCESS: Response: a5
+#  SUCCESS: X and Y coordinates are in expected range 
+#  	 Current X Coordinate: 5683
+#  	 Current Y Coordinate: 48ef
+# 
+# 
+# ** Note: $stop    : /filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv(108)
+#    Time: 2409620365 ns  Iteration: 1  Instance: /KnightsTour_tb
+# Break in Module KnightsTour_tb at /filespace/s/singhi/ECE551/project/Project_mark1_indented/KnightsTour_tb.sv line 108
+coverage report -output report.txt -instance=/tb_tasks -assert -directive -cvg -codeAll
+coverage report -output report.txt -instance=/tb_tasks -instance=/KnightsTour_tb -assert -directive -cvg -codeAll
+coverage report -output report.txt -instance=/tb_tasks -instance=/KnightsTour_tb -assert -directive -cvg -codeAll
+# End time: 01:51:27 on Dec 07,2024, Elapsed time: 0:07:10
+# Errors: 0, Warnings: 1

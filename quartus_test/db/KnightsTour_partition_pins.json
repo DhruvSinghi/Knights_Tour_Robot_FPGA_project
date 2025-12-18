@@ -1,0 +1,85 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "SS_n",
+					"strict" : false
+				},
+				{
+					"name" : "SCLK",
+					"strict" : false
+				},
+				{
+					"name" : "MOSI",
+					"strict" : false
+				},
+				{
+					"name" : "lftPWM1",
+					"strict" : false
+				},
+				{
+					"name" : "lftPWM2",
+					"strict" : false
+				},
+				{
+					"name" : "rghtPWM1",
+					"strict" : false
+				},
+				{
+					"name" : "rghtPWM2",
+					"strict" : false
+				},
+				{
+					"name" : "TX",
+					"strict" : false
+				},
+				{
+					"name" : "piezo",
+					"strict" : false
+				},
+				{
+					"name" : "piezo_n",
+					"strict" : false
+				},
+				{
+					"name" : "IR_en",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "RST_n",
+					"strict" : false
+				},
+				{
+					"name" : "INT",
+					"strict" : false
+				},
+				{
+					"name" : "lftIR_n",
+					"strict" : false
+				},
+				{
+					"name" : "rghtIR_n",
+					"strict" : false
+				},
+				{
+					"name" : "MISO",
+					"strict" : false
+				},
+				{
+					"name" : "RX",
+					"strict" : false
+				},
+				{
+					"name" : "cntrIR_n",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
